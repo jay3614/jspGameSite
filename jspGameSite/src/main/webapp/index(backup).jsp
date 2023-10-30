@@ -1,14 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@page import="com.game.video.Video"%>
-<%@page import="com.game.video.VideoDAO"%>
-<%@page import="com.game.notice.Notice"%>
-<%@page import="com.game.notice.NoticeDAO"%>
-<%@page import="com.game.event.Event"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.game.event.EventDAO"%>
-<html>
+<html lang="en">
 <head>
 <title>Home</title>
 <meta charset="UTF-8">
@@ -58,24 +49,7 @@
 </head>
 
 <body class="animsition">
-<%
-	String userID = null;
 
-	if(session.getAttribute("userID") != null){
-		userID = (String)session.getAttribute("userID");
-	}
-	
-	EventDAO eventDAO = new EventDAO();
-	ArrayList<Event> eventList = eventDAO.getList();
-	
-	NoticeDAO noticeDAO = new NoticeDAO();
-	ArrayList<Notice> noticeList = noticeDAO.getNoticeList();
-	ArrayList<Notice> updateList = noticeDAO.getUpdateList();
-	ArrayList<Notice> noticeAfterSec = noticeDAO.getNoticeAfter();
-	
-	VideoDAO videoDAO = new VideoDAO();
-	ArrayList<Video> videoList = videoDAO.getList();
-%>
 
 	<!-- Header -->
 	<header class="header-v4">
@@ -181,28 +155,23 @@
 				<div>
 					<div>
 						<div class="imgDiv">
-							<a href="#"><img class="event-img" id="event-img" src="<%=eventList.get(0).getImage()  %>"></a>
+							<a href="#"><img class="event-img" id="event-img" th:src="${eventList[0].image}"></a>	<!-- 타임리프 -> jsp 수정 -->
 						</div>
 					
 						<div class="wrap-slick2">
 							<div class="slick2">
-								<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+								<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15"
+									th:each="dto : ${eventList}">
 									<div class="block2">
 										<div class="block2-txt flex-w flex-t p-t-14">
-											<%
-												for(int i = 0; i < eventList.size(); i++) {
-											%>
 											<div class="block2-txt-child1 flex-col-l ">
-												<input class="eventImage" type="hidden" value="<%= eventList.get(i).getImage() %>">
+												<input class="eventImage" type="hidden" th:value="${dto.image}">	<!-- 타임리프 -> jsp 수정 -->
 												<span
-													class="event-title stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" id="<%= eventList.get(i).getId() %> %>"
+													class="event-title stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" th:id="${dto.id}"
 													 onclick="changeImg()">
-													<%= eventList.get(i).getTitle() %>
+													[[${dto.title}]]	<!-- 타임리프 -> jsp 수정 -->
 												</span>
 											</div>
-											<%
-												}
-											%>
 										</div>
 									</div>
 								</div>
@@ -218,28 +187,22 @@
 		<div class="row notice">
 			<div class="notice1">
 				<p class="type">업데이트</p><br>
-				<a class="title" href="#"><%= updateList.get(0).getTitle() %></a>
-				<p class="content"><%= updateList.get(0).getContent() %></p>
+				<a class="title" href="#">[[${updateList[0].title}]]</a>	<!-- 타임리프 -> jsp 수정 -->
+				<p class="content">[[${updateList[0].content}]]</p>			<!-- 타임리프 -> jsp 수정 -->
 			</div>
 			
 			<div class="notice2">
- 				<p class="type"><%= noticeList.get(0).getTypes() %></p><br>
-				<a class="title" href="#"><%= noticeList.get(0).getTitle() %></a>
-				<p class="content"><%= noticeList.get(0).getContent() %></p>
+				<p class="type">[[${noticeFirst[0].types}]]</p><br>			<!-- 타임리프 -> jsp 수정 -->
+				<a class="title" href="#">[[${noticeFirst[0].title}]]</a>	<!-- 타임리프 -> jsp 수정 -->
+				<p class="content">[[${noticeFirst[0].content}]]</p>		<!-- 타임리프 -> jsp 수정 -->
 			</div>
 			
 			<div class="notice3">
 				<ul>
-					<%
-						for(int i = 0; i < noticeAfterSec.size(); i++) {
-					%>
-					<li>
+					<li th:each="dto : ${noticeAfterSec}">					<!-- 타임리프 -> jsp 수정 -->
 						<span class="type">공지</span>
-						<a class="title" href="#"><%= noticeAfterSec.get(i).getTitle() %></a>
+						<a class="title" href="#">[[${dto.title}]]</a>		<!-- 타임리프 -> jsp 수정 -->
 					</li>
-					<%
-						}
-					%>
 				</ul>
 			</div>
 		</div>
@@ -271,44 +234,31 @@
 		<div class="mediaSection">
 			<h2>영상<img class="icon" src="img/icons/icon-plus.png" alt="plus button"></h2>
 			
-			<%
-				for(int i = 0; i < videoList.size(); i++) {
-			%>
-			<div class="screenshot">
+			<div class="screenshot" th:each="dto: ${videoList}">	<!-- 타임리프 -> jsp 수정 -->
 				<div class="bg0 media-video">
 					<a href="#">
-						<img th:src="'https://img.youtube.com/vi/' + <%= videoList.get(i).getYoutubeLink() %> + '/mqdefault.jpg'" alt="">
+						<img th:src="'https://img.youtube.com/vi/' + ${dto.youtubeLink} + '/mqdefault.jpg'" alt="">	<!-- 타임리프 -> jsp 수정 -->
 						<div class="flex-col-l">
-							<span text="<%= videoList.get(i).getTitle() %>"></span>
-							<span class="stext-105 cl3" text="<%= videoList.get(i).getWriter() %>"></span>
+							<span th:text="${dto.title}"></span>							<!-- 타임리프 -> jsp 수정 -->
+							<span class="stext-105 cl3" th:text="${dto.writer}"></span>		<!-- 타임리프 -> jsp 수정 -->
 						</div>
 					</a>
 				</div>
 			</div>
-			<%
-				}
-			%>
 			
 			<h2>스크린샷<img class="icon" src="img/icons/icon-plus.png" alt="plus button"></h2>
 			
-			<!-- 스크린샷으로 고쳐야함 -->
-			<%
-				for(int i = 0; i < videoList.size(); i++) {
-			%>
-			<div class="screenshot">
-				<div class="bg0 media-video">
+			<div class="screenshot" th:each="dto: ${videoList}">	<!-- 타임리프 -> jsp 수정 -->
+				<div class="bg0 media-screenshot">
 					<a href="#">
-						<img th:src="'https://img.youtube.com/vi/' + <%= videoList.get(i).getYoutubeLink() %> + '/mqdefault.jpg'" alt="">
+						<img th:src="'https://img.youtube.com/vi/' + ${dto.youtubeLink} + '/mqdefault.jpg'" alt="">	<!-- 타임리프 -> jsp 수정 -->
 						<div class="flex-col-l">
-							<span text="<%= videoList.get(i).getTitle() %>"></span>
-							<span class="stext-105 cl3" text="<%= videoList.get(i).getWriter() %>"></span>
+							<span th:text="${dto.title}"></span>							<!-- 타임리프 -> jsp 수정 -->
+							<span class="stext-105 cl3" th:text="${dto.writer}"></span>		<!-- 타임리프 -> jsp 수정 -->
 						</div>
 					</a>
 				</div>
 			</div>
-			<%
-				}
-			%>
 		</div>
 	</section>
 	
@@ -401,7 +351,8 @@
 		});
 	</script>
 	<!--===============================================================================================-->
-	<script>
+	<script th:inline="javascript">			<!-- 타임리프 -> jsp 수정 -->
+	/*<![CDATA[*/
 		function changeImg() {
 			var spanAll = document.querySelectorAll(".slick2 span");
 			var span = event.target;
@@ -414,7 +365,9 @@
 			span.style.textDecoration = "underline";
 			
   			img.setAttribute('src', changeImg);
+  			
 		}
+	/*]]>*/
 	</script>
 	
 </body>
