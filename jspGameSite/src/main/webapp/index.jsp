@@ -55,6 +55,11 @@
 <link rel="stylesheet" type="text/css" href="css/util.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+
+<!-- 테스트 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/myCustom.css">
+
 </head>
 
 <body class="animsition">
@@ -180,33 +185,20 @@
 			<div>
 				<div>
 					<div>
-						<div class="imgDiv">
-							<a href="#"><img class="event-img" id="event-img" src="<%=eventList.get(0).getImage()  %>"></a>
-						</div>
-					
-						<div class="wrap-slick2">
-							<div class="slick2">
-								<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-									<div class="block2">
-										<div class="block2-txt flex-w flex-t p-t-14">
-											<div class="block2-txt-child1 flex-col-l ">
-											<%
-												for(int i = 0; i < eventList.size(); i++) {
-											%>
-												<input class="eventImage" id="<%= eventList.get(i).getId() %>" type="hidden" value="<%= eventList.get(i).getImage() %>">
-												<span
-													class="event-title stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" id="<%= eventList.get(i).getId() %>"
-													 onclick="changeImg()">
-													<%= eventList.get(i).getTitle() %>
-												</span>
-											<%
-												}
-											%>
-											</div>
-										</div>
-									</div>
+						<div class="swiper">
+							<div class="swiper-wrapper">
+								<%
+									for(int i = 0; i < eventList.size(); i++) {
+								%>
+								<div class="swiper-slide">
+									<a href="#"><img class="event-img" id="event-img" src="<%=eventList.get(i).getImage() %>"></a>
 								</div>
+								<%
+									}
+								%>
 							</div>
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
 						</div>
 					</div>
 				</div>
@@ -370,6 +362,9 @@
 	</footer>
 
 
+	<!-- 테스트 -->
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+	
 	<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
@@ -405,7 +400,7 @@
 		});
 	</script>
 	<!--===============================================================================================-->
-	<script>
+	<!-- <script>
 		function changeImg() {
 			
 			var spanAll = document.querySelectorAll(".slick2 span");
@@ -421,6 +416,17 @@
 			}
 			span.style.textDecoration = "underline";
 		}
+	</script> -->
+	<!--===============================================================================================-->
+	<script>
+		const swiper = new Swiper('.swiper', {
+			loop: true,
+
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			}
+		});
 	</script>
 </body>
 </html>
