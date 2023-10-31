@@ -80,10 +80,9 @@ public class VideoDAO {
 		return -1;	// 데이터베이스 오류
 	}
 	
-	// 아직 미사용
 	public ArrayList<Video> getList() {
 		
-		String SQL = "SELECT * FROM video ORDER BY id ASC";
+		String SQL = "SELECT id, title, writer, youtubeLink, viewCount, date FROM video ORDER BY id ASC";
 		
 		ArrayList<Video> list = new ArrayList<Video>();
 		
@@ -96,12 +95,10 @@ public class VideoDAO {
 				
 				video.setId(rs.getLong(1));
 				video.setTitle(rs.getString(2));
-				video.setContent(rs.getString(3));
-				video.setWriter(rs.getString(4));	// member타입으로 가져오도록 수정
-				video.setYoutubeLink(rs.getString(5));
-				video.setFavorate(rs.getInt(6));
-				video.setViewCount(rs.getInt(7));
-				video.setDate(getDate());
+				video.setWriter(rs.getString(3));	// member타입으로 가져오도록 수정
+				video.setYoutubeLink(rs.getString(4));
+				video.setViewCount(rs.getInt(5));
+				video.setDate(rs.getString(6));
 				
 				list.add(video);
 			}

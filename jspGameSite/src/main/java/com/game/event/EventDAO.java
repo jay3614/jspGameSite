@@ -21,9 +21,6 @@ public class EventDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		}catch(Exception e){
-			System.out.println("+++++++++++++++++++++++++++++++");
-			System.out.println("에러 발생함");
-			System.out.println("+++++++++++++++++++++++++++++++");
 			e.printStackTrace();
 		}
 	}
@@ -82,7 +79,6 @@ public class EventDAO {
 		return -1;	// 데이터베이스 오류
 	}
 	
-	// 아직 미사용
 	public ArrayList<Event> getList() {
 		String SQL = "SELECT * FROM event ORDER BY id ASC";
 		
@@ -101,6 +97,32 @@ public class EventDAO {
 				event.setContent(rs.getString(4));
 				event.setImage(rs.getString(5));
 				event.setViewCount(rs.getInt(6));
+				
+				list.add(event);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
+	
+	public ArrayList<Event> getBannerList() {
+		String SQL = "SELECT id, title, image FROM event ORDER BY id ASC";
+		
+		ArrayList<Event> list = new ArrayList<Event>();
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Event event = new Event();
+				
+				event.setId(rs.getLong(1));
+				event.setTitle(rs.getString(2));
+				event.setImage(rs.getString(3));
 				
 				list.add(event);
 			}

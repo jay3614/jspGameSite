@@ -66,7 +66,7 @@
 	}
 	
 	EventDAO eventDAO = new EventDAO();
-	ArrayList<Event> eventList = eventDAO.getList();
+	ArrayList<Event> eventList = eventDAO.getBannerList();
 	
 	NoticeDAO noticeDAO = new NoticeDAO();
 	ArrayList<Notice> noticeList = noticeDAO.getNoticeList();
@@ -217,7 +217,7 @@
 	<section class="bg0 p-t-20 p-b-20 noticeSection">
 		<div class="row notice">
 			<div class="notice1">
-				<p class="type">업데이트</p><br>
+				<p class="type"><%= updateList.get(0).getTypes() %></p><br>
 				<a class="title" href="#"><%= updateList.get(0).getTitle() %></a>
 				<p class="content"><%= updateList.get(0).getContent() %></p>
 			</div>
@@ -227,7 +227,6 @@
 				<a class="title" href="#"><%= noticeList.get(0).getTitle() %></a>
 				<p class="content"><%= noticeList.get(0).getContent() %></p>
 			</div>
-			
 			<div class="notice3">
 				<ul>
 					<%
@@ -267,6 +266,7 @@
 		</div>
 	</section>
 
+	<!-- 미디어 섹션 -->
 	<section class="media bg2 p-t-20 p-b-20">
 		<div class="mediaSection">
 			<h2>영상<img class="icon" src="img/icons/icon-plus.png" alt="plus button"></h2>
@@ -276,13 +276,15 @@
 			%>
 			<div class="screenshot">
 				<div class="bg0 media-video">
-					<a href="#">
-						<img th:src="'https://img.youtube.com/vi/' + <%= videoList.get(i).getYoutubeLink() %> + '/mqdefault.jpg'" alt="">
-						<div class="flex-col-l">
-							<span text="<%= videoList.get(i).getTitle() %>"></span>
-							<span class="stext-105 cl3" text="<%= videoList.get(i).getWriter() %>"></span>
-						</div>
-					</a>
+					<div class="flex-col-l">
+						<a href="#">
+							<img src="https://img.youtube.com/vi/<%= videoList.get(i).getYoutubeLink() %>/mqdefault.jpg" alt="">
+							<span><%= videoList.get(i).getTitle() %></span><br>
+							<span class="stext-105 cl3">작성자: <%= videoList.get(i).getWriter() %></span>
+						</a>
+						<p>조회수: <%= videoList.get(i).getViewCount() %></p>
+						<p>업로드: <%= videoList.get(i).getDate() %></p>
+					</div>
 				</div>
 			</div>
 			<%
@@ -297,13 +299,15 @@
 			%>
 			<div class="screenshot">
 				<div class="bg0 media-video">
-					<a href="#">
-						<img th:src="'https://img.youtube.com/vi/' + <%= videoList.get(i).getYoutubeLink() %> + '/mqdefault.jpg'" alt="">
-						<div class="flex-col-l">
-							<span text="<%= videoList.get(i).getTitle() %>"></span>
-							<span class="stext-105 cl3" text="<%= videoList.get(i).getWriter() %>"></span>
-						</div>
-					</a>
+					<div class="flex-col-l">
+						<a href="#">
+							<img src="https://img.youtube.com/vi/<%= videoList.get(i).getYoutubeLink() %>/mqdefault.jpg" alt="">
+							<span><%= videoList.get(i).getTitle() %></span><br>
+							<span class="stext-105 cl3">작성자: <%= videoList.get(i).getWriter() %></span>
+						</a>
+						<p>조회수: <%= videoList.get(i).getViewCount() %></p>
+						<p>업로드: <%= videoList.get(i).getDate() %></p>
+					</div>
 				</div>
 			</div>
 			<%

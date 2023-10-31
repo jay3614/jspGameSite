@@ -80,7 +80,7 @@ public class NoticeDAO {
 	
 	public ArrayList<Notice> getNoticeList() {
 		
-		String SQL = "SELECT * FROM notice where types = '공지' ORDER BY id ASC";
+		String SQL = "SELECT * FROM notice WHERE types = '공지' ORDER BY id ASC";
 		
 		ArrayList<Notice> list = new ArrayList<Notice>();
 		
@@ -96,7 +96,7 @@ public class NoticeDAO {
 				notice.setContent(rs.getString(3));
 				notice.setViewCount(rs.getInt(4));
 				notice.setTypes(rs.getString(5));
-				notice.setRegDate(getDate());
+				notice.setRegDate(rs.getString(6));
 				
 				list.add(notice);
 			}
@@ -110,7 +110,7 @@ public class NoticeDAO {
 	
 	public ArrayList<Notice> getNoticeAfter() {
 		
-		String SQL = "SELECT * FROM Notice WHERE types = '공지' ORDER BY id ASC LIMIT 1, 5";
+		String SQL = "SELECT title FROM notice WHERE types = '공지' ORDER BY id ASC LIMIT 1, 5";
 		
 		ArrayList<Notice> list = new ArrayList<Notice>();
 		
@@ -121,12 +121,7 @@ public class NoticeDAO {
 			while(rs.next()) {
 				Notice notice = new Notice();
 				
-				notice.setId(rs.getLong(1));
-				notice.setTitle(rs.getString(2));
-				notice.setContent(rs.getString(3));
-				notice.setViewCount(rs.getInt(4));
-				notice.setTypes(rs.getString(5));
-				notice.setRegDate(getDate());
+				notice.setTitle(rs.getString(1));
 				
 				list.add(notice);
 			}
@@ -156,7 +151,7 @@ public class NoticeDAO {
 				notice.setContent(rs.getString(3));
 				notice.setViewCount(rs.getInt(4));
 				notice.setTypes(rs.getString(5));
-				notice.setRegDate(getDate());
+				notice.setRegDate(rs.getString(6));
 				
 				list.add(notice);
 			}
