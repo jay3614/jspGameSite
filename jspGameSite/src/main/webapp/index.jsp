@@ -15,45 +15,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/vendor/bootstrap/css/bootstrap.min.css">
+	href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/fonts/iconic/css/material-design-iconic-font.min.css">
+	href="fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/fonts/linearicons-v1.0.0/icon-font.min.css">
+	href="fonts/linearicons-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/vendor/animate/animate.css">
+	href="vendor/animate/animate.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/vendor/css-hamburgers/hamburgers.min.css">
+	href="vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/vendor/animsition/css/animsition.min.css">
+	href="vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/vendor/select2/select2.min.css">
+	href="vendor/select2/select2.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/vendor/daterangepicker/daterangepicker.css">
+	href="vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="/vendor/slick/slick.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="/vendor/MagnificPopup/magnific-popup.css">
+<link rel="stylesheet" type="text/css" href="vendor/slick/slick.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/vendor/perfect-scrollbar/perfect-scrollbar.css">
+	href="vendor/MagnificPopup/magnific-popup.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/vendor/owl Carousel/owl.carousel.min.css">
+	href="vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="/css/util.css">
-<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="stylesheet" type="text/css"
+	href="vendor/owl Carousel/owl.carousel.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="css/util.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 </head>
 
@@ -189,20 +189,20 @@
 								<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 									<div class="block2">
 										<div class="block2-txt flex-w flex-t p-t-14">
+											<div class="block2-txt-child1 flex-col-l ">
 											<%
 												for(int i = 0; i < eventList.size(); i++) {
 											%>
-											<div class="block2-txt-child1 flex-col-l ">
-												<input class="eventImage" type="hidden" value="<%= eventList.get(i).getImage() %>">
+												<input class="eventImage" id="<%= eventList.get(i).getId() %>" type="hidden" value="<%= eventList.get(i).getImage() %>">
 												<span
-													class="event-title stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" id="<%= eventList.get(i).getId() %> %>"
+													class="event-title stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" id="<%= eventList.get(i).getId() %>"
 													 onclick="changeImg()">
 													<%= eventList.get(i).getTitle() %>
 												</span>
-											</div>
 											<%
 												}
 											%>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -367,24 +367,24 @@
 
 
 	<!--===============================================================================================-->
-	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="/vendor/animsition/js/animsition.min.js"></script>
+	<script src="vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="/vendor/bootstrap/js/popper.js"></script>
-	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="/vendor/daterangepicker/moment.min.js"></script>
-	<script src="/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
 	<!--===============================================================================================-->
-	<script src="/vendor/slick/slick.min.js"></script>
-	<script src="/js/slick-custom.js"></script>
+	<script src="vendor/slick/slick.min.js"></script>
+	<script src="js/slick-custom.js"></script>
 	<!--===============================================================================================-->
-	<script src="/vendor/isotope/isotope.pkgd.min.js"></script>
+	<script src="vendor/isotope/isotope.pkgd.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="/js/main.js"></script>
+	<script src="js/main.js"></script>
 	<!--===============================================================================================-->
-	<script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
 		$('.js-pscroll').each(function() {
 			$(this).css('position', 'relative');
@@ -403,19 +403,20 @@
 	<!--===============================================================================================-->
 	<script>
 		function changeImg() {
+			
 			var spanAll = document.querySelectorAll(".slick2 span");
 			var span = event.target;
-			var img = document.querySelector('.event-img');
-			var changeImg = $(event.currentTarget).closest(".block2").find(".eventImage").val();
 			
-			for (const spanElement of spanAll) {
+			var id = event.target.id;
+			var src = $(event.currentTarget).closest(".block2").find("input[id='" + id + "']").val();
+			
+			document.getElementById("event-img").setAttribute("src", src);
+			
+			for (var spanElement of spanAll) {
 				spanElement.style.textDecoration = "none";
 			}
 			span.style.textDecoration = "underline";
-			
-  			img.setAttribute('src', changeImg);
 		}
 	</script>
-	
 </body>
 </html>
