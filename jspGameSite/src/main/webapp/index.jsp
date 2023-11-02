@@ -95,12 +95,13 @@
 					</div>
 					
 					<div class="left-top-bar">
-						<a href="https://github.com/jay3614/gameSite"><img src="img/icons/logo1.png" alt="IMG-LOGO"></a>
+						<a href="https://github.com/jay3614/jspGameSite"><img src="img/icons/logo1.png" alt="IMG-LOGO"></a>
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25"> LOG IN </a>
-						<a href="#" class="flex-c-m trans-04 p-lr-25"> LOGOUT </a>
+						<a href="/jspGameSite/register.jsp" class="flex-c-m trans-04 p-lr-25">회원가입</a>
+						<a href="/jspGameSite/login.jsp" class="flex-c-m trans-04 p-lr-25">로그인</a>
+						<a href="#" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
 					</div>
 				</div>
 			</div>
@@ -353,7 +354,7 @@
 					</p>
 					<p>SpringBoot personal project All Rights Reserved</p>
 					<div class="p-t-27">
-						<a href="https://github.com/jay3614/gameSite" target="_blank">
+						<a href="https://github.com/jay3614/jspGameSite" target="_blank">
 							<img src="img/icons/logo2.png" alt="COMPANY-LOGO">
 						</a>
 					</div>
