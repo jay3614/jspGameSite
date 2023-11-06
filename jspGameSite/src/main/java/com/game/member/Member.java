@@ -8,7 +8,6 @@ public class Member {
 	private String name;
 	private String phoneNumber;
 	private String gender;
-	private String ssn;
 	private int cash;
 	
 	public String getId() {
@@ -46,12 +45,6 @@ public class Member {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-	public String getSsn() {
-		return ssn;
-	}
-	public void setSsn(String ssn) {
-		this.ssn = ssn;
 	}
 	public int getCash() {
 		return cash;

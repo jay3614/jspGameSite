@@ -51,9 +51,9 @@ public class MemberDAO {
 		return -2;	// 데이터베이스 오류
 	}
 	
-	public int join(Member member) {
+	public int register(Member member) {
 		
-		String SQL = "INSERT INTO member VALUES (?, ?, ?, ?, ?, ?, 0)";
+		String SQL = "INSERT INTO member VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = conn.prepareStatement(SQL);
@@ -63,7 +63,7 @@ public class MemberDAO {
 			pstmt.setString(4, member.getName());
 			pstmt.setString(5, member.getPhoneNumber());
 			pstmt.setString(6, member.getGender());
-			pstmt.setString(7, member.getSsn());
+			pstmt.setInt(7, 0);
 			
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
