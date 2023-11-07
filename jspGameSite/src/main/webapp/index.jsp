@@ -64,10 +64,10 @@
 
 <body class="animsition">
 <%
-	String userID = null;
+	String id = null;
 
-	if(session.getAttribute("userID") != null){
-		userID = (String)session.getAttribute("userID");
+	if(session.getAttribute("id") != null){
+		id = (String)session.getAttribute("id");
 	}
 	
 	EventDAO eventDAO = new EventDAO();
@@ -99,9 +99,18 @@
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
+						<%
+							if(id == null) {
+						%>
 						<a href="/jspGameSite/register.jsp" class="flex-c-m trans-04 p-lr-25">회원가입</a>
 						<a href="/jspGameSite/login.jsp" class="flex-c-m trans-04 p-lr-25">로그인</a>
-						<a href="#" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
+						<%
+							}else {
+						%>
+						<a href="logoutAction.jsp" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
+						<%
+							}
+						%>
 					</div>
 				</div>
 			</div>

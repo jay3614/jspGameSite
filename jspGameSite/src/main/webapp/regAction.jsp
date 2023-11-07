@@ -1,7 +1,7 @@
-<%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.game.member.MemberDAO" %>
+<%@page import="java.io.PrintWriter"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="member" class="com.game.member.Member" scope="page" />
 <jsp:setProperty name="member" property="id" />
@@ -12,7 +12,6 @@
 <jsp:setProperty name="member" property="phoneNumber" />
 <!DOCTYPE html>
 <html>
-<meta charset="UTF-8">
 <head>
 <meta charset="UTF-8">
 <title>회원가입 로직</title>
@@ -22,13 +21,13 @@
 	<%
 		PrintWriter script = response.getWriter();
 	
-		String userID = null;
+		String id = null;
 		
 		if(session.getAttribute("id") != null){
-			userID = (String)session.getAttribute("id");
+			id = (String)session.getAttribute("id");
 		}
 		
-		if(userID != null){
+		if(id != null){
 			script.println("<script>");
 			script.println("alert('이미 로그인이 되어있습니다.')");
 			script.println("location.href = 'main.jsp'");

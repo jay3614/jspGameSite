@@ -20,8 +20,8 @@
 						<a href="/jspGameSite/"><img src="img/icons/logo1.png"></a>
 					</h1>
 				</div>
-				<form action="/loginProc" method="post" id="login-form">
-					<input type="text" class="form-control" name="username" id="username" placeholder="ID(이메일)">
+				<form method="post" action="loginAction.jsp" id="login-form">
+					<input type="text" class="form-control" name="id" id="id" placeholder="ID(이메일)">
 					<input type="password" class="form-control" name="password" id="password" placeholder="비밀번호">
 					<input type="submit" value="로그인">
 				</form>

@@ -83,12 +83,12 @@
 								<div class="orderBy__input input-group m-b--2 m-t-30">
 									<p>성별<span class="m-r-70">*</span></p>
 									<!-- <input type="text" class="form-control" aria-describedby="button-addon2" name="gender" placeholder="성별" required> -->
-									<input type="radio" name="gender" value="남자" required> 남자
-    								<input type="radio" name="gender" value="여자" required> 여자
+									<input type="radio" name="gender" value="남성" required> 남성
+    								<input type="radio" name="gender" value="여성" required> 여성
 								</div>
 							</div>
 						</div>
-						<button class="btn btn-danger btn-dark" type="submit">Sign In</button>
+						<button class="btn btn-danger btn-dark" type="submit">회원가입</button>
 					</div>
 				</form>
 			</div>

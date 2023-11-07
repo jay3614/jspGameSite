@@ -27,7 +27,6 @@ public class MemberDAO {
 	}
 	
 	public int login(String id, String password) {
-		
 		String SQL = "SELECT password FROM member WHERE id = ?";
 		
 		try {
