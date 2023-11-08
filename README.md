@@ -32,10 +32,31 @@
   - `Github`
   
   
+# 실제 구동 이미지
+  ## 메인 화면 
+  ![](https://i.imgur.com/K5NXtxs.jpg)
+  
+  <br><br><br>
+  
+  ## 공지사항 게시판 화면 
+  ![](https://i.imgur.com/oUSvk1f.jpg)
+  
+  <br><br><br>
+  
+  ## 로그인 화면
+  ![](https://i.imgur.com/mlHfjQU.jpg)
+  
+  <br><br><br>
+  
+  ## 회원가입 화면
+  ![](https://i.imgur.com/aj19MfI.jpg)
+
+
+
 # 개발 예정 항목
 
 **주요 사항** - 완료여부 (o,x)로 표기
-  - 회원가입 시 유효성 검사. (x)
+  - 회원가입 시 유효성 검사. (o)
   - 마이페이지 기능. (x)
   - 공지사항 게시물 CRUD, 커뮤니티 게시글에 이미지 등록 기능. (x)
   - 유튜브 영상을 링크 방식으로 업로드 시 영상의 썸네일을 이미지로 가져오는 기능(o)
