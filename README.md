@@ -1,4 +1,4 @@
-# jspGameSite
+# jspGameSite(작업중)
 - 게임 웹사이트 제작
 - 개인 프로젝트
 - 기존의 SpringBoot 기반으로 작업하던 gameSite 프로젝트를 jsp 버전으로 변경해서 작업하기
