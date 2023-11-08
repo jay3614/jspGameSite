@@ -2,3 +2,33 @@
   width: 1350px;
   height: 350px;
 }
+
+.custom-btn {
+  display: inline-block;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border: 1px solid transparent;
+  /* padding: 0.25rem; */
+  font-size: 1rem;
+  /* line-height: 1.25; */
+  border-radius: 0.25rem;
+  transition: all 0.15s ease-in-out;
+}
+
+.custom-btn-success {
+  color: #fff;
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(0, 0, 0);
+}
+
+.custom-btn-success:hover {
+  color: #fff;
+  background-color: rgb(170, 170, 170);
+  border-color: rgb(0, 0, 0);
+}

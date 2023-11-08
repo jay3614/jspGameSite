@@ -40,7 +40,6 @@ public class NoticeDAO {
 		return "";	// 데이터베이스 오류
 	}
 	
-	// 아직 미사용
 	public int getNext() {
 		String SQL = "SELECT id FROM notice ORDER BY id DESC";
 		
@@ -86,6 +85,39 @@ public class NoticeDAO {
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Notice notice = new Notice();
+				
+				notice.setId(rs.getLong(1));
+				notice.setTitle(rs.getString(2));
+				notice.setContent(rs.getString(3));
+				notice.setViewCount(rs.getInt(4));
+				notice.setTypes(rs.getString(5));
+				notice.setRegDate(rs.getString(6));
+				
+				list.add(notice);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
+	
+	public ArrayList<Notice> getNoticeList(int pageNumber) {
+		
+		//String SQL = "SELECT * FROM notice WHERE id < ? AND types = '공지' ORDER BY id DESC LIMIT 10";
+		String SQL = "SELECT * FROM notice WHERE types = '공지' ORDER BY id DESC LIMIT ?, 10";
+		
+		ArrayList<Notice> list = new ArrayList<Notice>();
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+//			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10);
+			pstmt.setInt(1, (pageNumber - 1) * 10);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -162,6 +194,26 @@ public class NoticeDAO {
 		return list;
 		
 	}
+	
+//	public boolean nextPage(int pageNumber) {
+//		
+////		String SQL = "SELECT * FROM notice WHERE id < ? AND types = '공지' ORDER BY id DESC LIMIT 10";
+//		String SQL = "SELECT * FROM notice WHERE types = '공지' ORDER BY id DESC LIMIT (? - 1) * 10, 10";
+//
+//		try {
+//			PreparedStatement pstmt = conn.prepareStatement(SQL);
+//			pstmt.setInt(1, pageNumber);
+//
+//			rs = pstmt.executeQuery();
+//			
+//			if(rs.next()) {
+//				return true;
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return false;
+//	}
 	
 	// 아직 미사용
 	public Notice getEvent(long id) {
