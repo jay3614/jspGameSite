@@ -22,11 +22,11 @@
   - `Gradle`
   - `JPA`
 - **프론트 개발 환경 및 언어**
-  - `jsp`
+  - `JSP`
   - `Bootstrap`
   
 - **데이터베이스**
-  - `mySQL`
+  - `MySQL`
   
 - **관리**
   - `Github`
