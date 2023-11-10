@@ -52,9 +52,9 @@
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="../css/util.css?after">
 <link rel="stylesheet" type="text/css" href="../css/main.css?after">
+<link rel="stylesheet" type="text/css" href="../css/myCustom.css?after">
 <!--===============================================================================================-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-<link rel="stylesheet" type="text/css" href="../css/myCustom.css?after">
 </head>
 
 <body class="animsition">
@@ -117,7 +117,7 @@
 
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
-					<a href="/index" class="logo"> <img src="../img/icons/logo1.png" alt="IMG-LOGO"></a>
+					<a href="../index.jsp" class="logo"> <img src="../img/icons/logo1.png" alt="IMG-LOGO"></a>
 					<div class="menu-desktop">
 						<ul class="customMenu expanded">
 							<li><a href="#">새소식</a>
@@ -188,22 +188,22 @@
 	</div>
 	<!-- 게임목록 메뉴 끝 -->
 	
-	<section class="bg0 p-t-20 p-b-20">
-		<div>
-			<ul>
-				<li class="float-l p-l-30"><a href="news/notice.jsp">공지사항</a></li>
-				<li class="float-l p-l-30"><a href="news/update.jsp">업데이트</a></li>
-				<li class="float-l p-l-30"><a href="news/event.jsp">이벤트</a></li>
-			</ul>
-		</div>
-	</section>
 	
 	<section class="bg0 p-t-40 p-b-20">
 		<div class="container">
-			
 			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-80">
-					<div class="customMenu p-b-30">
+					<!--  -->
+					<div class="row p-b-10 wrap-slick3">
+						<ul class="test">
+							<li class="float-l p-l-30"><a class="clblack" href="news/notice.jsp">공지사항</a></li>
+							<li class="float-l p-l-30"><a class="clblack" href="news/update.jsp">업데이트</a></li>
+							<li class="float-l p-l-30"><a class="clblack" href="news/event.jsp">이벤트</a></li>
+						</ul>
+						<span class="mnb_line" style="width: 60px; left: 30px;"></span>
+					</div>
+					<!--  -->
+					<div class="customMenu p-t-30 p-b-30 bor18">
 						<div class="col-lg-8">
 							<h1>공지사항</h1>
 						</div>
@@ -393,23 +393,29 @@
 		});
 	</script>
 	<!--===============================================================================================-->
-	<!-- <script>
-		function changeImg() {
+	<script>
+		// 마우스 이벤트 리스너 등록
+		const ul = document.querySelector("ul.test");
+		ul.addEventListener("mousemove", (event) => {
+			// 마우스가 올라가있는 <li> 요소 가져오기
+			const li = event.target.closest("li");
+		
+			// <span>의 left 값 설정
+			const span = document.querySelector(".mnb_line");
 			
-			var spanAll = document.querySelectorAll(".slick2 span");
-			var span = event.target;
-			
-			var id = event.target.id;
-			var src = $(event.currentTarget).closest(".block2").find("input[id='" + id + "']").val();
-			
-			document.getElementById("event-img").setAttribute("src", src);
-			
-			for (var spanElement of spanAll) {
-				spanElement.style.textDecoration = "none";
+			if(li.textContent === "업데이트") {
+				span.style.left = li.offsetLeft + 30 + "px";
+				span.style.width = 60 + "px";
+			}else if(li.textContent === "이벤트") {
+				span.style.left = li.offsetLeft + 30 + "px";
+				span.style.width = 45 + "px";
+			}else if(li.textContent === "공지사항") {
+				span.style.left = li.offsetLeft + 30 + "px";
+				span.style.width = 60 + "px";
 			}
-			span.style.textDecoration = "underline";
-		}
-	</script> -->
+			
+		});
+	</script>
 	<!--===============================================================================================-->
 	<script>
 		const swiper = new Swiper('.swiper', {

@@ -54,9 +54,9 @@
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="css/util.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/myCustom.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-<link rel="stylesheet" type="text/css" href="css/myCustom.css">
 </head>
 
 <body class="animsition">
@@ -114,7 +114,7 @@
 
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
-					<a href="/index" class="logo"> <img src="img/icons/logo1.png" alt="IMG-LOGO"></a>
+					<a href="index.jsp" class="logo"> <img src="img/icons/logo1.png" alt="IMG-LOGO"></a>
 					<div class="menu-desktop">
 						<ul class="customMenu expanded">
 							<li><a href="#">새소식</a>
@@ -406,24 +406,6 @@
 			})
 		});
 	</script>
-	<!--===============================================================================================-->
-	<!-- <script>
-		function changeImg() {
-			
-			var spanAll = document.querySelectorAll(".slick2 span");
-			var span = event.target;
-			
-			var id = event.target.id;
-			var src = $(event.currentTarget).closest(".block2").find("input[id='" + id + "']").val();
-			
-			document.getElementById("event-img").setAttribute("src", src);
-			
-			for (var spanElement of spanAll) {
-				spanElement.style.textDecoration = "none";
-			}
-			span.style.textDecoration = "underline";
-		}
-	</script> -->
 	<!--===============================================================================================-->
 	<script>
 		const swiper = new Swiper('.swiper', {
