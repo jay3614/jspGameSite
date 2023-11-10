@@ -99,8 +99,8 @@
 						<%
 							if(id == null) {
 						%>
-						<a href="/jspGameSite/register.jsp" class="flex-c-m trans-04 p-lr-25">회원가입</a>
-						<a href="/jspGameSite/login.jsp" class="flex-c-m trans-04 p-lr-25">로그인</a>
+						<a href="register.jsp" class="flex-c-m trans-04 p-lr-25">회원가입</a>
+						<a href="login.jsp" class="flex-c-m trans-04 p-lr-25">로그인</a>
 						<%
 							}else {
 						%>
@@ -119,9 +119,9 @@
 						<ul class="customMenu expanded">
 							<li><a href="#">새소식</a>
 								<ul class="sub-menu">
-									<li><a href="#">공지사항</a></li>
-									<li><a href="#">업데이트</a></li>
-									<li><a href="#">이벤트</a></li>
+									<li><a href="/news/notice.jsp">공지사항</a></li>
+									<li><a href="/news/update.jsp">업데이트</a></li>
+									<li><a href="/news/event.jsp">이벤트</a></li>
 								</ul>
 							</li>
 							<li><a href="#">가이드</a>
