@@ -119,9 +119,9 @@
 						<ul class="customMenu expanded">
 							<li><a href="#">새소식</a>
 								<ul class="sub-menu">
-									<li><a href="/news/notice.jsp">공지사항</a></li>
-									<li><a href="/news/update.jsp">업데이트</a></li>
-									<li><a href="/news/event.jsp">이벤트</a></li>
+									<li><a href="news/notice.jsp">공지사항</a></li>
+									<li><a href="news/update.jsp">업데이트</a></li>
+									<li><a href="news/event.jsp">이벤트</a></li>
 								</ul>
 							</li>
 							<li><a href="#">가이드</a>
