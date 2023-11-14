@@ -3372,6 +3372,7 @@ iframe {border: none;}
 [ Float ]*/
 .float-l {float: left;}
 .float-r {float: right;}
+.float-n {float: none;}
 
 
 /*------------------------------------------------------------------

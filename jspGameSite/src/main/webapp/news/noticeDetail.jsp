@@ -50,9 +50,9 @@
 <link rel="stylesheet" type="text/css"
 	href="../vendor/owl Carousel/owl.carousel.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="../css/util.css?after">
-<link rel="stylesheet" type="text/css" href="../css/main.css?after">
-<link rel="stylesheet" type="text/css" href="../css/myCustom.css?after">
+<link rel="stylesheet" type="text/css" href="../css/util.css">
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<link rel="stylesheet" type="text/css" href="../css/myCustom.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
@@ -201,86 +201,51 @@
 						</ul>
 						<span class="mnb_line" style="width: 60px; left: 30px;"></span>
 					</div>
-					<div class="customMenu p-t-30 p-b-30 bor18">
-						<div class="col-lg-8">
-							<h1>공지사항</h1>
-						</div>
-						<div class="col-lg-4">
-							<div class="bor17 of-hidden pos-relative">
-								<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55"
-									type="text" name="search" placeholder="Search">
-			
-								<button
-									class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-									<i class="zmdi zmdi-search"></i>
-								</button>
+					<div class="test123">
+						<div class="customMenu p-t-30 p-b-30 bor18 custom_div">
+							<div class="">
+								<h1>공지사항</h1>
+							</div>
+							<div class="custom_border">
+								<span class=""><a href="notice.jsp" class="">목록</a></span>
 							</div>
 						</div>
-					</div>
-				
-					<table class="table bor18">
-						<tbody>
-							<%
-								ArrayList<Notice> list = noticeDAO.getNoticeList(pageNumber);
-								for(int i = 0; i < list.size(); i++) {
-									
-							%>
-							<tr>
-								<td class="col-lg-9">
-									<a class="clblack" href="noticeView.jsp?id=<%= list.get(i).getId() %>"><%= list.get(i).getTitle() %></a>
-								</td>
-								<td class="col-lg-3">
-									<img class="float-l mt-1" src="../img/icons/sub_date_new.png" alt="시계 아이콘">&nbsp;
-									<%
-										int year = Integer.parseInt(list.get(i).getRegDate().substring(0, 4));
-										int month = Integer.parseInt(list.get(i).getRegDate().substring(5, 7));
-										int day = Integer.parseInt(list.get(i).getRegDate().substring(8, 10));
-										if(year == nowYear && month == nowMonth && day == nowDay) {	// 현재날짜와 같다면 날짜가 아닌 시간 표시
-									%>
-									<%= list.get(i).getRegDate().substring(11, 16)%>
-									<%
-										}else {
-									%>
-									<%= list.get(i).getRegDate().substring(0, 10)%>
-									<%
-										}
-									%>
-								</td>
-							</tr>
-							<%
-								}
-							%>
-							</tbody>
-					</table>
-					<!--  -->
-					<div class="product__pagination">
-						<div class="pagination h-100 justify-content-center align-items-center">
-							<%
-								if(pageNumber != 1) {
-							%>
-							<a class="custom-btn custom-btn-success" href="notice.jsp?pageNumber=<%= pageNumber - 1 %>">&lt;&lt;</a>
-							<%
-								}
-							%>
-							<%
-								for(int i = 0; i < (noticeList.size() + 1) / 10 + 1; i++) {
-							%>
-								<a class="custom-btn custom-btn-success" href="notice.jsp?pageNumber=<%= i + 1 %>"><%= i + 1 %></a>
-							<%
-								}
-							%>
-							<%
-								if(pageNumber == 1) {
-							%>
-							<a class="custom-btn custom-btn-success" href="notice.jsp?pageNumber=<%= pageNumber + 1 %>">&gt;&gt;</a>
-							<%
-								}
-							%>
+						<p class="notice_detail_title">
+							<img class="float-l m-r-7 m-t--4" src="../img/icons/notice_icon01.png"><span class="">제목 들어갈 칸</span>
+						</p>
+						<div class="notice_detail_time">
+							<div class="float-r">
+								<p class="float-l time_style"><img class="clock float-l" src="../img/icons/eye_new.png">viewCount</p>
+								<p class="float-l time_style"><img class="clock float-l" src="../img/icons/sub_date_new.png">날짜</p>
+							</div>
+						</div>
+						<div class="notice_detail_content">
+							<p>내용</p>
+							<p>내용</p>
+							<p>내용</p>
+						</div>
+						<div class="notice_detail_pageMove">
+							<ul>
+								<li>
+									<a class="page_move_btn" href="">
+										<img class="clock3 float-l" src="../img/icons/page_up.png">이전글
+									</a>
+									<a class="float-l" href="">이전글 내용</a>
+									<p class="fs-12 time_style float-r"><img class="clock2 float-l" src="../img/icons/sub_date_new.png">11-14</p>
+								</li>
+								<li>
+									<span class="page_move_btn">
+										<a href="">
+											<img class="clock3 float-l" src="../img/icons/page_down.png">다음글
+										</a>
+									</span>
+									<a class="float-l" href="">다음글 내용</a>
+									<p class="fs-12 time_style float-r"><img class="clock2 float-l" src="../img/icons/sub_date_new.png">PM 18:19</p>
+								</li>
+							</ul>
 						</div>
 					</div>
-					<!--  -->
 				</div>
-
 				<div class="col-md-4 col-lg-3">
 					<div class="side-menu">
 						<div class="p-t-55 m-t-8">
