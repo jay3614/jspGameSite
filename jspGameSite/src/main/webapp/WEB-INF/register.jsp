@@ -13,19 +13,8 @@
 </head>
 <body>
 	<header class="header-v4">
-		<div class="container-menu-desktop">
-			<div class="top-bar">
-				<div class="flex-sb-m h-full container">
-					<div class="left-top-bar">
-						<a href="https://github.com/jay3614/jspGameSite"><img src="img/icons/logo1.png" alt="IMG-LOGO"></a>
-					</div>
-					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">회원가입</a>
-						<a href="#" class="flex-c-m trans-04 p-lr-25">로그인</a>
-						<a href="#" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
-					</div>
-				</div>
-			</div>
+		<div class="container-menu-desktop flex-c">
+			<a href="index"><img src="img/icons/logo1.png" alt="IMG-LOGO"></a>
 		</div>
 	</header>
 
@@ -82,7 +71,6 @@
 								<!-- 성별 -->
 								<div class="orderBy__input input-group m-b--2 m-t-30">
 									<p>성별<span class="m-r-70">*</span></p>
-									<!-- <input type="text" class="form-control" aria-describedby="button-addon2" name="gender" placeholder="성별" required> -->
 									<input type="radio" name="gender" value="남성" required> 남성
     								<input type="radio" name="gender" value="여성" required> 여성
 								</div>

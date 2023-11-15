@@ -1,11 +1,13 @@
-<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@page import="com.game.video.Video"%>
 <%@page import="com.game.video.VideoDAO"%>
 <%@page import="com.game.notice.Notice"%>
 <%@page import="com.game.notice.NoticeDAO"%>
+<%@page import="com.game.event.Event"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="com.game.event.EventDAO"%>
 <html>
 <head>
 <title>Home</title>
@@ -13,46 +15,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="../vendor/bootstrap/css/bootstrap.min.css">
+	href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="../fonts/iconic/css/material-design-iconic-font.min.css">
+	href="fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="../fonts/linearicons-v1.0.0/icon-font.min.css">
+	href="fonts/linearicons-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="../vendor/animate/animate.css">
+	href="vendor/animate/animate.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="../vendor/css-hamburgers/hamburgers.min.css">
+	href="vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="../vendor/animsition/css/animsition.min.css">
+	href="vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="../vendor/select2/select2.min.css">
+	href="vendor/select2/select2.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="../vendor/daterangepicker/daterangepicker.css">
+	href="vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="../vendor/slick/slick.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../vendor/MagnificPopup/magnific-popup.css">
+<link rel="stylesheet" type="text/css" href="vendor/slick/slick.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="../vendor/perfect-scrollbar/perfect-scrollbar.css">
+	href="vendor/MagnificPopup/magnific-popup.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="../vendor/owl Carousel/owl.carousel.min.css">
+	href="vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="../css/util.css?after">
-<link rel="stylesheet" type="text/css" href="../css/main.css?after">
-<link rel="stylesheet" type="text/css" href="../css/myCustom.css?after">
+<link rel="stylesheet" type="text/css"
+	href="vendor/owl Carousel/owl.carousel.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="css/util.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/myCustom.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
@@ -65,21 +67,16 @@
 		id = (String)session.getAttribute("id");
 	}
 	
-	int pageNumber = 1;
-	
-	if(request.getParameter("pageNumber") != null) {
-		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-	}
+	EventDAO eventDAO = new EventDAO();
+	ArrayList<Event> eventList = eventDAO.getBannerList();
 	
 	NoticeDAO noticeDAO = new NoticeDAO();
 	ArrayList<Notice> noticeList = noticeDAO.getNoticeList();
 	ArrayList<Notice> updateList = noticeDAO.getUpdateList();
 	ArrayList<Notice> noticeAfterSec = noticeDAO.getNoticeAfter();
 	
-	Calendar cal = Calendar.getInstance();
-    int nowYear = cal.get(Calendar.YEAR);
-    int nowMonth = cal.get(Calendar.MONTH) + 1;
-    int nowDay = cal.get(Calendar.DAY_OF_MONTH);
+	VideoDAO videoDAO = new VideoDAO();
+	ArrayList<Video> videoList = videoDAO.getList();
 %>
 
 	<!-- Header -->
@@ -90,20 +87,20 @@
 					<div class="wrap-icon-header flex-w flex-l-m">
 						<div
 							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart">
-							<img class="top-menu" src="../img/icons/menu.png" alt="IMG-LOGO">
+							<img class="top-menu" src="img/icons/menu.png" alt="IMG-LOGO">
 						</div>
 					</div>
 					
 					<div class="left-top-bar">
-						<a href="https://github.com/jay3614/jspGameSite"><img src="../img/icons/logo1.png" alt="IMG-LOGO"></a>
+						<a href="https://github.com/jay3614/jspGameSite"><img src="img/icons/logo1.png" alt="IMG-LOGO"></a>
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
 						<%
 							if(id == null) {
 						%>
-						<a href="register.jsp" class="flex-c-m trans-04 p-lr-25">회원가입</a>
-						<a href="login.jsp" class="flex-c-m trans-04 p-lr-25">로그인</a>
+						<a href="register" class="flex-c-m trans-04 p-lr-25">회원가입</a>
+						<a href="login" class="flex-c-m trans-04 p-lr-25">로그인</a>
 						<%
 							}else {
 						%>
@@ -117,14 +114,14 @@
 
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
-					<a href="../index.jsp" class="logo"> <img src="../img/icons/logo1.png" alt="IMG-LOGO"></a>
+					<a href="index" class="logo"> <img src="img/icons/logo1.png" alt="IMG-LOGO"></a>
 					<div class="menu-desktop">
 						<ul class="customMenu expanded">
-							<li><a href="#">새소식</a>
+							<li><a href="news/notice">새소식</a>
 								<ul class="sub-menu">
-									<li><a href="news/notice.jsp">공지사항</a></li>
-									<li><a href="news/update.jsp">업데이트</a></li>
-									<li><a href="news/event.jsp">이벤트</a></li>
+									<li><a href="news/notice">공지사항</a></li>
+									<li><a href="news/update">업데이트</a></li>
+									<li><a href="news/event">이벤트</a></li>
 								</ul>
 							</li>
 							<li><a href="#">가이드</a>
@@ -189,112 +186,27 @@
 	<!-- 게임목록 메뉴 끝 -->
 	
 	
-	<section class="bg0 p-t-40 p-b-20">
+	<!-- 본문 시작 -->
+	<section class="eventSection bg0 p-t-50 p-b-20">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-lg-9 p-b-80">
-					<div class="row p-b-10 wrap-slick3">
-						<ul class="test">
-							<li class="float-l p-l-30"><a class="clblack" href="news/notice.jsp">공지사항</a></li>
-							<li class="float-l p-l-30"><a class="clblack" href="news/update.jsp">업데이트</a></li>
-							<li class="float-l p-l-30"><a class="clblack" href="news/event.jsp">이벤트</a></li>
-						</ul>
-						<span class="mnb_line" style="width: 60px; left: 30px;"></span>
-					</div>
-					<div class="customMenu p-t-30 p-b-30 bor18">
-						<div class="col-lg-8">
-							<h1>공지사항</h1>
-						</div>
-						<div class="col-lg-4">
-							<div class="bor17 of-hidden pos-relative">
-								<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55"
-									type="text" name="search" placeholder="Search">
-			
-								<button
-									class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-									<i class="zmdi zmdi-search"></i>
-								</button>
+			<div>
+				<div>
+					<div>
+						<div class="swiper">
+							<div class="swiper-wrapper">
+								<%
+									for(int i = 0; i < eventList.size(); i++) {
+								%>
+								<div class="swiper-slide">
+									<a href="#"><img class="event-img" id="event-img" src="<%=eventList.get(i).getImage() %>"></a>
+								</div>
+								<%
+									}
+								%>
 							</div>
-						</div>
-					</div>
-				
-					<table class="table bor18">
-						<tbody>
-							<%
-								ArrayList<Notice> list = noticeDAO.getNoticeList(pageNumber);
-								for(int i = 0; i < list.size(); i++) {
-									
-							%>
-							<tr>
-								<td class="col-lg-9">
-									<a class="clblack" href="noticeView.jsp?id=<%= list.get(i).getId() %>"><%= list.get(i).getTitle() %></a>
-								</td>
-								<td class="col-lg-3">
-									<img class="float-l mt-1" src="../img/icons/sub_date_new.png" alt="시계 아이콘">&nbsp;
-									<%
-										int year = Integer.parseInt(list.get(i).getRegDate().substring(0, 4));
-										int month = Integer.parseInt(list.get(i).getRegDate().substring(5, 7));
-										int day = Integer.parseInt(list.get(i).getRegDate().substring(8, 10));
-										if(year == nowYear && month == nowMonth && day == nowDay) {	// 현재날짜와 같다면 날짜가 아닌 시간 표시
-									%>
-									<%= list.get(i).getRegDate().substring(11, 16)%>
-									<%
-										}else {
-									%>
-									<%= list.get(i).getRegDate().substring(0, 10)%>
-									<%
-										}
-									%>
-								</td>
-							</tr>
-							<%
-								}
-							%>
-							</tbody>
-					</table>
-					<!--  -->
-					<div class="product__pagination">
-						<div class="pagination h-100 justify-content-center align-items-center">
-							<%
-								if(pageNumber != 1) {
-							%>
-							<a class="custom-btn custom-btn-success" href="notice.jsp?pageNumber=<%= pageNumber - 1 %>">&lt;&lt;</a>
-							<%
-								}
-							%>
-							<%
-								for(int i = 0; i < (noticeList.size() + 1) / 10 + 1; i++) {
-							%>
-								<a class="custom-btn custom-btn-success" href="notice.jsp?pageNumber=<%= i + 1 %>"><%= i + 1 %></a>
-							<%
-								}
-							%>
-							<%
-								if(pageNumber == 1) {
-							%>
-							<a class="custom-btn custom-btn-success" href="notice.jsp?pageNumber=<%= pageNumber + 1 %>">&gt;&gt;</a>
-							<%
-								}
-							%>
-						</div>
-					</div>
-					<!--  -->
-				</div>
-
-				<div class="col-md-4 col-lg-3">
-					<div class="side-menu">
-						<div class="p-t-55 m-t-8">
-							<h4 class="mtext-112 cl2 p-b-33">Categories</h4>
-							<ul>
-								<li class="bor18"><a href="#"
-									class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-15 p-lr-4">
-										Notice</a>
-								</li>
-								<li class="bor18"><a href="#"
-									class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-15 p-lr-4">
-										Review</a>
-								</li>
-							</ul>
+							<div class="swiper-pagination"></div>
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
 						</div>
 					</div>
 				</div>
@@ -302,9 +214,113 @@
 		</div>
 	</section>
 	
+	<section class="bg0 p-t-20 p-b-20 noticeSection">
+		<div class="row notice">
+			<div class="notice1">
+				<p class="type"><%= updateList.get(0).getTypes() %></p><br>
+				<a class="title" href="#"><%= updateList.get(0).getTitle() %></a>
+				<p class="content"><%= updateList.get(0).getContent() %></p>
+			</div>
+			
+			<div class="notice2">
+ 				<p class="type"><%= noticeList.get(0).getTypes() %></p><br>
+				<a class="title" href="#"><%= noticeList.get(0).getTitle() %></a>
+				<p class="content"><%= noticeList.get(0).getContent() %></p>
+			</div>
+			<div class="notice3">
+				<ul>
+					<%
+						for(int i = 0; i < noticeAfterSec.size(); i++) {
+					%>
+					<li>
+						<span class="type">공지</span>
+						<a class="title" href="#"><%= noticeAfterSec.get(i).getTitle() %></a>
+					</li>
+					<%
+						}
+					%>
+				</ul>
+			</div>
+		</div>
+		
+	</section>
+	
+	<section class="guide bg8 p-t-30 p-b-20">
+		<div class="row guideSection">
+			<div class="guide1">
+				<p>자바스토리<br>게임정보</p>
+				<a href="#"><img src="img/test/btn_off.png" alt="IMG-LOGO"></a>
+			</div>
+			
+			<div class="guide2">
+				<a href="#"><img src="img/test/banner1.png" alt="IMG-LOGO"></a>
+			</div>
+			
+			<div class="guide3">
+				<a href="#"><img src="img/test/banner2.png" alt="IMG-LOGO"></a>
+			</div>
+			
+			<div class="guide4">
+				<a href="#"><img src="img/test/banner3.png" alt="IMG-LOGO"></a>
+			</div>
+		</div>
+	</section>
+
+	<!-- 미디어 섹션 -->
+	<section class="media bg2 p-t-20 p-b-20">
+		<div class="mediaSection">
+			<h2>영상<img class="icon" src="img/icons/icon-plus.png" alt="plus button"></h2>
+			
+			<%
+				for(int i = 0; i < videoList.size(); i++) {
+			%>
+			<div class="screenshot">
+				<div class="bg0 media-video">
+					<div class="flex-col-l">
+						<a href="#">
+							<img src="https://img.youtube.com/vi/<%= videoList.get(i).getYoutubeLink() %>/mqdefault.jpg" alt="">
+							<span><%= videoList.get(i).getTitle() %></span><br>
+							<span class="stext-105 cl3">작성자: <%= videoList.get(i).getWriter() %></span>
+						</a>
+						<p>조회수: <%= videoList.get(i).getViewCount() %></p>
+						<p>업로드: <%= videoList.get(i).getDate() %></p>
+					</div>
+				</div>
+			</div>
+			<%
+				}
+			%>
+			
+			<h2>스크린샷<img class="icon" src="img/icons/icon-plus.png" alt="plus button"></h2>
+			
+			<!-- 스크린샷으로 고쳐야함 -->
+			<%
+				for(int i = 0; i < videoList.size(); i++) {
+			%>
+			<div class="screenshot">
+				<div class="bg0 media-video">
+					<div class="flex-col-l">
+						<a href="#">
+							<img src="https://img.youtube.com/vi/<%= videoList.get(i).getYoutubeLink() %>/mqdefault.jpg" alt="">
+							<span><%= videoList.get(i).getTitle() %></span><br>
+							<span class="stext-105 cl3">작성자: <%= videoList.get(i).getWriter() %></span>
+						</a>
+						<p>조회수: <%= videoList.get(i).getViewCount() %></p>
+						<p>업로드: <%= videoList.get(i).getDate() %></p>
+					</div>
+				</div>
+			</div>
+			<%
+				}
+			%>
+		</div>
+	</section>
+	
+	<!-- 본문 끝 -->
+	
 	
 	<!-- Footer -->
-	<footer class="bg3 p-t-65 p-b-75">
+	<footer class="bg3 p-t-65 p-b-32">
 		<div class="container">
 			<div>
 				<div class="footer_info">
@@ -345,7 +361,7 @@
 					<p>SpringBoot personal project All Rights Reserved</p>
 					<div class="p-t-27">
 						<a href="https://github.com/jay3614/jspGameSite" target="_blank">
-							<img src="../img/icons/logo2.png" alt="COMPANY-LOGO">
+							<img src="img/icons/logo2.png" alt="COMPANY-LOGO">
 						</a>
 					</div>
 				</div>
@@ -357,24 +373,24 @@
 	<!--===============================================================================================-->
 	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="../vendor/animsition/js/animsition.min.js"></script>
+	<script src="vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="../vendor/bootstrap/js/popper.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="../vendor/daterangepicker/moment.min.js"></script>
-	<script src="../vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
 	<!--===============================================================================================-->
-	<script src="../vendor/slick/slick.min.js"></script>
-	<script src="../js/slick-custom.js"></script>
+	<script src="vendor/slick/slick.min.js"></script>
+	<script src="js/slick-custom.js"></script>
 	<!--===============================================================================================-->
-	<script src="../vendor/isotope/isotope.pkgd.min.js"></script>
+	<script src="vendor/isotope/isotope.pkgd.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="../js/main.js"></script>
+	<script src="js/main.js"></script>
 	<!--===============================================================================================-->
-	<script src="../vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
 		$('.js-pscroll').each(function() {
 			$(this).css('position', 'relative');
@@ -388,30 +404,6 @@
 			$(window).on('resize', function() {
 				ps.update();
 			})
-		});
-	</script>
-	<!--===============================================================================================-->
-	<script>
-		// 마우스 이벤트 리스너 등록
-		const ul = document.querySelector("ul.test");
-		ul.addEventListener("mousemove", (event) => {
-			// 마우스가 올라가있는 <li> 요소 가져오기
-			const li = event.target.closest("li");
-		
-			// <span>의 left 값 설정
-			const span = document.querySelector(".mnb_line");
-			
-			if(li.textContent === "업데이트") {
-				span.style.left = li.offsetLeft + 30 + "px";
-				span.style.width = 60 + "px";
-			}else if(li.textContent === "이벤트") {
-				span.style.left = li.offsetLeft + 30 + "px";
-				span.style.width = 45 + "px";
-			}else if(li.textContent === "공지사항") {
-				span.style.left = li.offsetLeft + 30 + "px";
-				span.style.width = 60 + "px";
-			}
-			
 		});
 	</script>
 	<!--===============================================================================================-->

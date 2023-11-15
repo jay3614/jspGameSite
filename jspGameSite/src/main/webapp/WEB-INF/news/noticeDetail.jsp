@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@page import="com.game.video.VideoDAO"%>
 <%@page import="com.game.notice.Notice"%>
 <%@page import="com.game.notice.NoticeDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -65,16 +64,10 @@
 		id = (String)session.getAttribute("id");
 	}
 	
-	int pageNumber = 1;
-	
-	if(request.getParameter("pageNumber") != null) {
-		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-	}
-	
+	// 아직 미사용
 	NoticeDAO noticeDAO = new NoticeDAO();
 	ArrayList<Notice> noticeList = noticeDAO.getNoticeList();
-	ArrayList<Notice> updateList = noticeDAO.getUpdateList();
-	ArrayList<Notice> noticeAfterSec = noticeDAO.getNoticeAfter();
+	//
 	
 	Calendar cal = Calendar.getInstance();
     int nowYear = cal.get(Calendar.YEAR);
@@ -102,12 +95,12 @@
 						<%
 							if(id == null) {
 						%>
-						<a href="register.jsp" class="flex-c-m trans-04 p-lr-25">회원가입</a>
-						<a href="login.jsp" class="flex-c-m trans-04 p-lr-25">로그인</a>
+						<a href="../register" class="flex-c-m trans-04 p-lr-25">회원가입</a>
+						<a href="../login" class="flex-c-m trans-04 p-lr-25">로그인</a>
 						<%
 							}else {
 						%>
-						<a href="logoutAction.jsp" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
+						<a href="../logoutAction.jsp" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
 						<%
 							}
 						%>
@@ -117,14 +110,14 @@
 
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
-					<a href="../index.jsp" class="logo"> <img src="../img/icons/logo1.png" alt="IMG-LOGO"></a>
+					<a href="../index" class="logo"> <img src="../img/icons/logo1.png" alt="IMG-LOGO"></a>
 					<div class="menu-desktop">
 						<ul class="customMenu expanded">
-							<li><a href="#">새소식</a>
+							<li><a href="notice">새소식</a>
 								<ul class="sub-menu">
-									<li><a href="news/notice.jsp">공지사항</a></li>
-									<li><a href="news/update.jsp">업데이트</a></li>
-									<li><a href="news/event.jsp">이벤트</a></li>
+									<li><a href="notice">공지사항</a></li>
+									<li><a href="update">업데이트</a></li>
+									<li><a href="event">이벤트</a></li>
 								</ul>
 							</li>
 							<li><a href="#">가이드</a>
@@ -195,9 +188,9 @@
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="row p-b-10 wrap-slick3">
 						<ul class="test">
-							<li class="float-l p-l-30"><a class="clblack" href="news/notice.jsp">공지사항</a></li>
-							<li class="float-l p-l-30"><a class="clblack" href="news/update.jsp">업데이트</a></li>
-							<li class="float-l p-l-30"><a class="clblack" href="news/event.jsp">이벤트</a></li>
+							<li class="float-l p-l-30"><a class="clblack" href="notice">공지사항</a></li>
+							<li class="float-l p-l-30"><a class="clblack" href="update">업데이트</a></li>
+							<li class="float-l p-l-30"><a class="clblack" href="event">이벤트</a></li>
 						</ul>
 						<span class="mnb_line" style="width: 60px; left: 30px;"></span>
 					</div>
@@ -207,7 +200,7 @@
 								<h1>공지사항</h1>
 							</div>
 							<div class="custom_border">
-								<span class=""><a href="notice.jsp" class="">목록</a></span>
+								<span class=""><a href="notice" class="">목록</a></span>
 							</div>
 						</div>
 						<p class="notice_detail_title">
