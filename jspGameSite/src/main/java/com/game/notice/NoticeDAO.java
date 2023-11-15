@@ -25,6 +25,7 @@ public class NoticeDAO {
 		}
 	}
 	
+	// 현재 날짜 리턴
 	public String getDate() {
 		String SQL = "SELECT NOW()";
 		
@@ -40,6 +41,7 @@ public class NoticeDAO {
 		return "";	// 데이터베이스 오류
 	}
 	
+	// 아직 미사용
 	public int getNext() {
 		String SQL = "SELECT id FROM notice ORDER BY id DESC";
 		
@@ -57,6 +59,7 @@ public class NoticeDAO {
 	}
 	
 	// 아직 미사용
+	// 글 작성
 	public int write(String title, String content, int viewCount, String types, String date) {
 		
 		String SQL = "INSERT INTO event VALUES (?, ?, ?, ?, ?, ?)";
@@ -77,6 +80,7 @@ public class NoticeDAO {
 		return -1;	// 데이터베이스 오류
 	}
 	
+	// index 페이지용 공지사항 리스트
 	public ArrayList<Notice> getNoticeList() {
 		
 		String SQL = "SELECT * FROM notice WHERE types = '공지' ORDER BY id ASC";
@@ -95,7 +99,7 @@ public class NoticeDAO {
 				notice.setContent(rs.getString(3));
 				notice.setViewCount(rs.getInt(4));
 				notice.setTypes(rs.getString(5));
-				notice.setRegDate(rs.getString(6));
+				notice.setDate(rs.getString(6));
 				
 				list.add(notice);
 			}
@@ -107,16 +111,15 @@ public class NoticeDAO {
 		
 	}
 	
+	// 공지사항 리스트
 	public ArrayList<Notice> getNoticeList(int pageNumber) {
 		
-		//String SQL = "SELECT * FROM notice WHERE id < ? AND types = '공지' ORDER BY id DESC LIMIT 10";
 		String SQL = "SELECT * FROM notice WHERE types = '공지' ORDER BY id DESC LIMIT ?, 10";
 		
 		ArrayList<Notice> list = new ArrayList<Notice>();
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-//			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10);
 			pstmt.setInt(1, (pageNumber - 1) * 10);
 			rs = pstmt.executeQuery();
 			
@@ -128,7 +131,7 @@ public class NoticeDAO {
 				notice.setContent(rs.getString(3));
 				notice.setViewCount(rs.getInt(4));
 				notice.setTypes(rs.getString(5));
-				notice.setRegDate(rs.getString(6));
+				notice.setDate(rs.getString(6));
 				
 				list.add(notice);
 			}
@@ -140,6 +143,7 @@ public class NoticeDAO {
 		
 	}
 	
+	// index 페이지용 공지사항 리스트
 	public ArrayList<Notice> getNoticeAfter() {
 		
 		String SQL = "SELECT title FROM notice WHERE types = '공지' ORDER BY id ASC LIMIT 1, 5";
@@ -165,6 +169,7 @@ public class NoticeDAO {
 		
 	}
 	
+	// 업데이트 리스트
 	public ArrayList<Notice> getUpdateList() {
 		
 		String SQL = "SELECT * FROM notice where types = '업데이트' ORDER BY id ASC";
@@ -183,7 +188,7 @@ public class NoticeDAO {
 				notice.setContent(rs.getString(3));
 				notice.setViewCount(rs.getInt(4));
 				notice.setTypes(rs.getString(5));
-				notice.setRegDate(rs.getString(6));
+				notice.setDate(rs.getString(6));
 				
 				list.add(notice);
 			}
@@ -195,28 +200,8 @@ public class NoticeDAO {
 		
 	}
 	
-//	public boolean nextPage(int pageNumber) {
-//		
-////		String SQL = "SELECT * FROM notice WHERE id < ? AND types = '공지' ORDER BY id DESC LIMIT 10";
-//		String SQL = "SELECT * FROM notice WHERE types = '공지' ORDER BY id DESC LIMIT (? - 1) * 10, 10";
-//
-//		try {
-//			PreparedStatement pstmt = conn.prepareStatement(SQL);
-//			pstmt.setInt(1, pageNumber);
-//
-//			rs = pstmt.executeQuery();
-//			
-//			if(rs.next()) {
-//				return true;
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return false;
-//	}
-	
-	// 아직 미사용
-	public Notice getEvent(long id) {
+	// 글 상세
+	public Notice getNotice(long id) {
 		
 		String SQL = "SELECT * FROM notice WHERE id = ?";
 		
@@ -234,7 +219,11 @@ public class NoticeDAO {
 				notice.setContent(rs.getString(3));
 				notice.setViewCount(rs.getInt(4));
 				notice.setTypes(rs.getString(5));
-				notice.setRegDate(getDate());
+				notice.setDate(rs.getString(6));
+				
+				int viewCount = rs.getInt(4);
+				viewCount++;
+				countUpdate(viewCount, id);
 				
 				return notice;
 			}
@@ -245,7 +234,22 @@ public class NoticeDAO {
 		
 	}
 	
+	// 조회수 증가
+	public int countUpdate(int viewCount, long id) {
+		String SQL = "update notice set viewCount = ? where id = ?";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setInt(1, viewCount);//물음표의 순서
+			pstmt.setLong(2, id);
+			return pstmt.executeUpdate();		
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;//데이터베이스 오류
+	}
+	
 	// 아직 미사용
+	// 글 수정
 	public int update(String title, String content, String types) {
 		
 		String SQL = "UPDATE notice SET title = ?, content = ?, types = ? WHERE id = ?";
@@ -265,6 +269,7 @@ public class NoticeDAO {
 	}
 	
 	// 아직 미사용
+	// 글 삭제
 	public int delete(long id) {
 		
 		String SQL = "UPDATE notice WHERE id = ?";

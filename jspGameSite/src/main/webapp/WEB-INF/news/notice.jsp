@@ -229,16 +229,16 @@
 								<td class="col-lg-3">
 									<img class="float-l mt-1" src="../img/icons/sub_date_new.png" alt="시계 아이콘">&nbsp;
 									<%
-										int year = Integer.parseInt(list.get(i).getRegDate().substring(0, 4));
-										int month = Integer.parseInt(list.get(i).getRegDate().substring(5, 7));
-										int day = Integer.parseInt(list.get(i).getRegDate().substring(8, 10));
+										int year = Integer.parseInt(list.get(i).getDate().substring(0, 4));
+										int month = Integer.parseInt(list.get(i).getDate().substring(5, 7));
+										int day = Integer.parseInt(list.get(i).getDate().substring(8, 10));
 										if(year == nowYear && month == nowMonth && day == nowDay) {	// 현재날짜와 같다면 날짜가 아닌 시간 표시
 									%>
-									<%= list.get(i).getRegDate().substring(11, 16)%>
+									<%= list.get(i).getDate().substring(11, 16)%>
 									<%
 										}else {
 									%>
-									<%= list.get(i).getRegDate().substring(0, 10)%>
+									<%= list.get(i).getDate().substring(0, 10)%>
 									<%
 										}
 									%>

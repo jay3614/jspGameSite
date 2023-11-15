@@ -39,10 +39,10 @@ public class Notice {
 	public void setTypes(String types) {
 		this.types = types;
 	}
-	public String getRegDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setRegDate(String regDate) {
-		this.date = regDate;
+	public void setDate(String date) {
+		this.date = date;
 	}
 }

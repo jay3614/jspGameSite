@@ -1,3 +1,4 @@
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -63,6 +64,24 @@
 	if(session.getAttribute("id") != null){
 		id = (String)session.getAttribute("id");
 	}
+	
+	int noticeId = 0;
+	
+	if(request.getParameter("id") != null) {
+		noticeId = Integer.parseInt(request.getParameter("id"));
+	}
+	
+	if(noticeId == 0) {
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('유효하지 않은 글입니다.')");
+		script.println("location.href = 'notice'");
+		script.println("</script>");
+	}
+	
+	Notice notice = new NoticeDAO().getNotice(noticeId);
+	Notice noticePrev = new NoticeDAO().getNotice(noticeId + 1);	// 이전글
+	Notice noticeNext = new NoticeDAO().getNotice(noticeId - 1);	// 다음글
 	
 	// 아직 미사용
 	NoticeDAO noticeDAO = new NoticeDAO();
@@ -204,36 +223,113 @@
 							</div>
 						</div>
 						<p class="notice_detail_title">
-							<img class="float-l m-r-7 m-t--4" src="../img/icons/notice_icon01.png"><span class="">제목 들어갈 칸</span>
+							<img class="float-l m-r-7 m-t--4" src="../img/icons/notice_icon01.png"><span class=""><%= notice.getTitle() %></span>
 						</p>
 						<div class="notice_detail_time">
 							<div class="float-r">
-								<p class="float-l time_style"><img class="clock float-l" src="../img/icons/eye_new.png">viewCount</p>
-								<p class="float-l time_style"><img class="clock float-l" src="../img/icons/sub_date_new.png">날짜</p>
+								<p class="float-l time_style"><img class="clock float-l" src="../img/icons/eye_new.png"><%= notice.getViewCount() %></p>
+								<p class="float-l time_style"><img class="clock float-l" src="../img/icons/sub_date_new.png">
+									<%
+										int year = Integer.parseInt(notice.getDate().substring(0, 4));
+										int month = Integer.parseInt(notice.getDate().substring(5, 7));
+										int day = Integer.parseInt(notice.getDate().substring(8, 10));
+										if(year == nowYear && month == nowMonth && day == nowDay) {
+									%>
+									<%= notice.getDate().substring(11, 16)%>
+									<%
+										}else {
+									%>
+									<%= notice.getDate().substring(0, 10)%>
+									<%
+										}
+									%>
+								</p>
 							</div>
 						</div>
 						<div class="notice_detail_content">
-							<p>내용</p>
-							<p>내용</p>
-							<p>내용</p>
+							<p><%= notice.getContent() %></p>
 						</div>
 						<div class="notice_detail_pageMove">
 							<ul>
 								<li>
-									<a class="page_move_btn" href="">
+									<%
+										if(noticePrev == null) {	// noticeId의 이전글이 없다면
+									%>
+									<p class="page_move_btn">
+										<img class="clock3 float-l" src="../img/icons/page_up.png">이전글
+									</p>
+									<p class="float-l">
+										이전글이 없습니다.
+									</p>
+									<%
+										}else {	// noticeId의 이전글이 있다면
+									%>
+									<a class="page_move_btn" href="noticeDetail?id=<%= noticePrev.getId() %>">
 										<img class="clock3 float-l" src="../img/icons/page_up.png">이전글
 									</a>
-									<a class="float-l" href="">이전글 내용</a>
-									<p class="fs-12 time_style float-r"><img class="clock2 float-l" src="../img/icons/sub_date_new.png">11-14</p>
+									<a class="float-l" href="noticeDetail?id=<%= noticePrev.getId() %>">
+										<%= noticePrev.getTitle() %>
+									</a>
+									<p class="fs-12 time_style float-r"><img class="clock2 float-l" src="../img/icons/sub_date_new.png">
+										<%
+										int yearP = Integer.parseInt(noticePrev.getDate().substring(0, 4));
+										int monthP = Integer.parseInt(noticePrev.getDate().substring(5, 7));
+										int dayP = Integer.parseInt(noticePrev.getDate().substring(8, 10));
+										if(yearP == nowYear && monthP == nowMonth && dayP == nowDay) {
+										%>
+										<%= noticePrev.getDate().substring(11, 16)%>
+										<%
+											}else {
+										%>
+										<%= noticePrev.getDate().substring(0, 10)%>
+										<%
+											}
+										%>
+									</p>
+									<%
+										}
+									%>
 								</li>
 								<li>
-									<span class="page_move_btn">
-										<a href="">
+									<%
+										if(noticeNext == null) {	// noticeId의 다음글이 없다면
+									%>
+									<p class="page_move_btn">
+										<img class="clock3 float-l" src="../img/icons/page_down.png">다음글
+									</p>
+									<p class="float-l">
+										다음글이 없습니다.
+									</p>
+									<%
+										}else {	// noticeId의 이전글이 있다면
+									%>
+									<p class="page_move_btn">
+										<a href="noticeDetail?id=<%= noticeNext.getId() %>">
 											<img class="clock3 float-l" src="../img/icons/page_down.png">다음글
 										</a>
-									</span>
-									<a class="float-l" href="">다음글 내용</a>
-									<p class="fs-12 time_style float-r"><img class="clock2 float-l" src="../img/icons/sub_date_new.png">PM 18:19</p>
+									</p>
+									<a class="float-l" href="noticeDetail?id=<%= noticeNext.getId() %>">
+										<%= noticeNext.getTitle() %>
+									</a>
+									<p class="fs-12 time_style float-r"><img class="clock2 float-l" src="../img/icons/sub_date_new.png">
+										<%
+										int yearN = Integer.parseInt(noticeNext.getDate().substring(0, 4));
+										int monthN = Integer.parseInt(noticeNext.getDate().substring(5, 7));
+										int dayN = Integer.parseInt(noticeNext.getDate().substring(8, 10));
+										if(yearN == nowYear && monthN == nowMonth && dayN == nowDay) {
+										%>
+										<%= noticeNext.getDate().substring(11, 16)%>
+										<%
+											}else {
+										%>
+										<%= noticeNext.getDate().substring(0, 10)%>
+										<%
+											}
+										%>
+									</p>
+									<%
+										}
+									%>
 								</li>
 							</ul>
 						</div>
