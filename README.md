@@ -42,7 +42,12 @@
   ![](https://i.imgur.com/oUSvk1f.jpg)
   
   <br><br><br>
+
+  ## 공지사항 게시판 상세화면 
+  ![](https://i.imgur.com/oUSvk1f.jpg)
   
+  <br><br><br>
+
   ## 로그인 화면
   ![](https://i.imgur.com/mlHfjQU.jpg)
   
