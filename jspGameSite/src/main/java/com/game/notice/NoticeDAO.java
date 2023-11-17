@@ -83,7 +83,7 @@ public class NoticeDAO {
 	// index 페이지용 공지사항 리스트
 	public ArrayList<Notice> getNoticeList() {
 		
-		String SQL = "SELECT * FROM notice WHERE types = '공지' ORDER BY id ASC";
+		String SQL = "SELECT * FROM notice WHERE types = '공지' ORDER BY id DESC";
 		
 		ArrayList<Notice> list = new ArrayList<Notice>();
 		
@@ -146,7 +146,7 @@ public class NoticeDAO {
 	// index 페이지용 공지사항 리스트
 	public ArrayList<Notice> getNoticeAfter() {
 		
-		String SQL = "SELECT title FROM notice WHERE types = '공지' ORDER BY id ASC LIMIT 1, 5";
+		String SQL = "SELECT title FROM notice WHERE types = '공지' ORDER BY id DESC LIMIT 1, 5";
 		
 		ArrayList<Notice> list = new ArrayList<Notice>();
 		
@@ -169,10 +169,41 @@ public class NoticeDAO {
 		
 	}
 	
-	// 업데이트 리스트
+	// index 페이지용 업데이트 리스트
 	public ArrayList<Notice> getUpdateList() {
 		
-		String SQL = "SELECT * FROM notice where types = '업데이트' ORDER BY id ASC";
+		String SQL = "SELECT * FROM notice where types = '업데이트' ORDER BY id DESC";
+		
+		ArrayList<Notice> list = new ArrayList<Notice>();
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Notice notice = new Notice();
+				
+				notice.setId(rs.getLong(1));
+				notice.setTitle(rs.getString(2));
+				notice.setContent(rs.getString(3));
+				notice.setViewCount(rs.getInt(4));
+				notice.setTypes(rs.getString(5));
+				notice.setDate(rs.getString(6));
+				
+				list.add(notice);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
+	
+	// 업데이트 리스트
+	public ArrayList<Notice> getUpdateList(int pageNumber) {
+		
+		String SQL = "SELECT * FROM notice WHERE types = '업데이트' ORDER BY id DESC LIMIT ?, 10";
 		
 		ArrayList<Notice> list = new ArrayList<Notice>();
 		

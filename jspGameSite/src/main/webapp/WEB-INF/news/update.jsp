@@ -7,7 +7,7 @@
 <%@page import="java.util.ArrayList"%>
 <html>
 <head>
-<title>Home</title>
+<title>update</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -58,12 +58,6 @@
 
 <body class="animsition">
 <%
-	String id = null;
-
-	if(session.getAttribute("id") != null){
-		id = (String)session.getAttribute("id");
-	}
-	
 	int pageNumber = 1;
 	
 	if(request.getParameter("pageNumber") != null) {
@@ -71,7 +65,7 @@
 	}
 	
 	NoticeDAO noticeDAO = new NoticeDAO();
-	ArrayList<Notice> noticeList = noticeDAO.getNoticeList();
+	ArrayList<Notice> updateList = noticeDAO.getUpdateList();
 	
 	Calendar cal = Calendar.getInstance();
     int nowYear = cal.get(Calendar.YEAR);
@@ -79,7 +73,7 @@
     int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 %>
 
-	<jsp:include page="/WEB-INF/fragment/header.jsp" />	
+	<jsp:include page="/WEB-INF/fragment/header.jsp" />
 	
 	<section class="bg0 p-t-40 p-b-20">
 		<div class="container">
@@ -91,11 +85,11 @@
 							<li class="float-l p-l-30"><a class="clblack" href="update">업데이트</a></li>
 							<li class="float-l p-l-30"><a class="clblack" href="event">이벤트</a></li>
 						</ul>
-						<span class="mnb_line" style="width: 60px; left: 30px;"></span>
+						<span class="mnb_line" style="width: 60px; left: 120px;"></span>
 					</div>
 					<div class="customMenu p-t-30 p-b-30 bor18">
 						<div class="col-lg-8">
-							<h1>공지사항</h1>
+							<h1>업데이트</h1>
 						</div>
 						<div class="col-lg-4">
 							<div class="bor17 of-hidden pos-relative">
@@ -113,7 +107,7 @@
 					<table class="table bor18">
 						<tbody>
 							<%
-								ArrayList<Notice> list = noticeDAO.getNoticeList(pageNumber);
+								ArrayList<Notice> list = noticeDAO.getUpdateList(pageNumber);
 								for(int i = 0; i < list.size(); i++) {
 									
 							%>
@@ -149,35 +143,37 @@
 							<%
 								if(pageNumber != 1) {
 							%>
-							<a class="custom-btn custom-btn-success" href="notice?pageNumber=<%= pageNumber - 1 %>">&lt;&lt;</a>
+							<a class="custom-btn custom-btn-success" href="update?pageNumber=<%= pageNumber - 1 %>">&lt;&lt;</a>
 							<%
 								}
 							%>
 							<%
-								for(int i = 0; i < (noticeList.size() + 1) / 10 + 1; i++) {
+								for(int i = 0; i < (updateList.size() + 1) / 10 + 1; i++) {
 							%>
-								<a class="custom-btn custom-btn-success" href="notice?pageNumber=<%= i + 1 %>"><%= i + 1 %></a>
+								<a class="custom-btn custom-btn-success" href="update?pageNumber=<%= i + 1 %>"><%= i + 1 %></a>
 							<%
 								}
 							%>
 							<%
 								if(pageNumber == 1) {
 							%>
-							<a class="custom-btn custom-btn-success" href="notice?pageNumber=<%= pageNumber + 1 %>">&gt;&gt;</a>
+							<a class="custom-btn custom-btn-success" href="update?pageNumber=<%= pageNumber + 1 %>">&gt;&gt;</a>
 							<%
 								}
 							%>
 						</div>
 					</div>
 				</div>
-				
+
 				<jsp:include page="/WEB-INF/fragment/side.jsp"/>
 				
 			</div>
 		</div>
 	</section>
 	
+	
 	<jsp:include page="/WEB-INF/fragment/footer.jsp"/>
+
 
 	<!--===============================================================================================-->
 	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

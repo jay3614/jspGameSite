@@ -50,5 +50,23 @@
   	<url-pattern>/news/noticeDetail</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>update</servlet-name>
+  	<jsp-file>/WEB-INF/news/update.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>update</servlet-name>
+  	<url-pattern>/news/update</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>updateDetail</servlet-name>
+  	<jsp-file>/WEB-INF/news/updateDetail.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>updateDetail</servlet-name>
+  	<url-pattern>/news/updateDetail</url-pattern>
+  </servlet-mapping>
+  
   
 </web-app>

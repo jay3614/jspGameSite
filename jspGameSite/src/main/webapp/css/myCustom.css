@@ -3,6 +3,11 @@
   height: 350px;
 }
 
+.swiper2 {
+  width: 285 !important;
+  height: 550px !important;
+}
+
 .custom-btn {
   display: inline-block;
   font-weight: normal;
@@ -53,7 +58,6 @@
 }
 
 .notice_detail_title {
-	width: 876px;
 	font-size: 24px;
 	font-weight: bold;
 	background-color: #f9f9f9;
@@ -127,7 +131,13 @@
     margin-top: 15px;
 }
 
-.test123 {
-	padding-left: 30px;
-	width: 930px;
+.side_board {
+    width: 100%;
+    float: left;
+    margin-top: 60px;
+    border-top: 2px solid #343536;
+}
+
+.hov-ul:hover {
+	text-decoration: underline;
 }
