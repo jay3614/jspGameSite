@@ -1,12 +1,33 @@
 .swiper {
-  width: 1350px;
-  height: 350px;
+	width: 1350px;
+	height: 350px;
 }
 
 .swiper2 {
-  width: 285 !important;
-  height: 550px !important;
+	width: 285px !important;
+	height: auto !important;
+	border: 1px solid black;
+	padding-bottom: 15px !important;
 }
+
+.swiper2 p {
+	text-align: center;
+}
+
+.swiper-button-prev2, .swiper-button-next2 {
+	background-color: #fff;
+	opacity: 0.5;
+	padding: 15px 5px;
+	border-radius: 20px;
+	color: black !important;
+	top: 87% !important;
+}
+
+.swiper-button-prev2:after,.swiper-button-next2:after {
+	font-size: 1.1rem !important;
+	font-weight: 600 !important;
+}
+
 
 .custom-btn {
   display: inline-block;

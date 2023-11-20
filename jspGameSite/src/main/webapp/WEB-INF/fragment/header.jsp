@@ -58,7 +58,7 @@
 							<li><a href="${pageContext.request.contextPath}/news/notice">새소식</a>
 								<ul class="sub-menu">
 									<li><a href="${pageContext.request.contextPath}/news/notice">공지사항</a></li>
-									<li><a href="${pageContext.request.contextPath}news/update">업데이트</a></li>
+									<li><a href="${pageContext.request.contextPath}/news/update">업데이트</a></li>
 									<li><a href="${pageContext.request.contextPath}/news/event">이벤트</a></li>
 								</ul>
 							</li>

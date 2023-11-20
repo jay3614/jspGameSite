@@ -12,6 +12,7 @@
 <title>Home</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 
 <body class="animsition">
@@ -52,34 +53,33 @@
 					%>
 				</ul>
 			</div>
-			
-			<!-- 고쳐야함 -->
 			<div>
 				<div class="swiper swiper2">
-					<div class="swiper-wrapper">	<!-- 이미지 칸 -->
+					<div class="swiper-wrapper">
 						<%
 							for(int i = 0; i < eventList.size(); i++) {
 						%>
 						<div class="swiper-slide">
 							<a href="#"><img class="event-img" id="event-img" src="<%=eventList.get(i).getImage() %>" style="width: 285px; height: 120px"></a>
 							<p class="text-truncate"><%= eventList.get(i).getTitle() %></p>
+							<p><%= i + 1 %>/<%= eventList.size() %></p>
 						</div>
 						<%
 							}
 						%>
 					</div>
-					<div class="swiper-button-prev"></div>
-					<div class="swiper-button-next"></div>
+					<div class="swiper-button-prev swiper-button-prev2"></div>
+					<div class="swiper-button-next swiper-button-next2"></div>
 				</div>
 			</div>
-			<!--  -->
-			
 		</div>
 	</div>
 	
 	<!--===============================================================================================-->
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+	<!--===============================================================================================-->
 	<script>
-		const swiper = new Swiper('.swiper', {
+		const swiper = new Swiper('.swiper2', {
 			loop: true,
 			
 			pagination: {
