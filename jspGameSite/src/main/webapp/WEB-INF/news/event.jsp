@@ -2,12 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@page import="com.game.notice.Notice"%>
-<%@page import="com.game.notice.NoticeDAO"%>
+<%@page import="com.game.event.Event"%>
+<%@page import="com.game.event.EventDAO"%>
 <%@page import="java.util.ArrayList"%>
 <html>
 <head>
-<title>update</title>
+<title>event</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -52,6 +52,7 @@
 <link rel="stylesheet" type="text/css" href="../css/util.css?after">
 <link rel="stylesheet" type="text/css" href="../css/main.css?after">
 <link rel="stylesheet" type="text/css" href="../css/myCustom.css?after">
+<!--===============================================================================================-->
 </head>
 
 <body class="animsition">
@@ -62,8 +63,8 @@
 		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 	}
 	
-	NoticeDAO noticeDAO = new NoticeDAO();
-	ArrayList<Notice> updateList = noticeDAO.getUpdateList();
+	EventDAO eventeDAO = new EventDAO();
+	ArrayList<Event> eventList = eventeDAO.getEventList();
 	
 	Calendar cal = Calendar.getInstance();
     int nowYear = cal.get(Calendar.YEAR);
@@ -82,11 +83,11 @@
 						<li class="float-l p-l-30"><a class="clblack" href="update">업데이트</a></li>
 						<li class="float-l p-l-30"><a class="clblack" href="event">이벤트</a></li>
 					</ul>
-					<span class="mnb_line" style="width: 60px; left: 120px;"></span>
+					<span class="mnb_line" style="width: 45px; left: 210px;"></span>
 				</div>
 				<div class="customMenu p-t-30 p-b-30 bor18">
 					<div class="col-lg-8">
-						<h1>업데이트</h1>
+						<h1>이벤트</h1>
 					</div>
 					<div class="col-lg-4">
 						<div class="bor17 of-hidden pos-relative">
@@ -100,61 +101,53 @@
 						</div>
 					</div>
 				</div>
-			
-				<table class="table bor18">
-					<tbody>
-						<%
-							ArrayList<Notice> list = noticeDAO.getUpdateList(pageNumber);
-							for(int i = 0; i < list.size(); i++) {
-								
-						%>
-						<tr>
-							<td class="col-lg-9">
-								<a class="clblack" href="noticeDetail?id=<%= list.get(i).getId() %>"><%= list.get(i).getTitle() %></a>
-							</td>
-							<td class="col-lg-3">
-								<img class="float-l mt-1" src="../img/icons/sub_date_new.png" alt="시계 아이콘">&nbsp;
-								<%
-									int year = Integer.parseInt(list.get(i).getDate().substring(0, 4));
-									int month = Integer.parseInt(list.get(i).getDate().substring(5, 7));
-									int day = Integer.parseInt(list.get(i).getDate().substring(8, 10));
-									if(year == nowYear && month == nowMonth && day == nowDay) {	// 현재날짜와 같다면 날짜가 아닌 시간 표시
-								%>
-								<%= list.get(i).getDate().substring(11, 16)%>
-								<%
-									}else {
-								%>
-								<%= list.get(i).getDate().substring(0, 10)%>
-								<%
-									}
-								%>
-							</td>
-						</tr>
-						<%
-							}
-						%>
-					</tbody>
-				</table>
+				
+				<!--  -->
+				<div class="d-flex flex-w p-l-30">
+					<%
+						for(int i = 0; i < eventList.size(); i++) {
+					%>
+					<div class="m-r-30 m-t-30 event-div">
+						<div class="bg0">
+							<div class="flex-col-l txt-center m-b-20">
+								<a href="#">
+									<img src="<%= eventList.get(i).getImage() %>" style="width: 285px; height: 120px" alt="">
+									<span class="cl2"><%= eventList.get(i).getTitle() %></span><br>
+								</a>
+							</div>
+							<div class="d-flex flex-c event-div2">
+								<p class="cl9 m-t-15 fs-12">
+									<img class="float-l m-t-1" src="../img/icons/date_icon_new.png">&nbsp;&nbsp;<%= eventList.get(i).getEventRange() %>
+								</p>
+							</div>
+						</div>
+					</div>
+					<%
+						}
+					%>
+				</div>
+				<!--  -->
+				
 				<div class="product__pagination">
 					<div class="pagination h-100 justify-content-center align-items-center">
 						<%
 							if(pageNumber != 1) {
 						%>
-						<a class="custom-btn custom-btn-success" href="update?pageNumber=<%= pageNumber - 1 %>">&lt;&lt;</a>
+						<a class="custom-btn custom-btn-success" href="event?pageNumber=<%= pageNumber - 1 %>">&lt;&lt;</a>
 						<%
 							}
 						%>
 						<%
-							for(int i = 0; i < (updateList.size() + 1) / 10 + 1; i++) {
+							for(int i = 0; i < (eventList.size() + 1) / 10 + 1; i++) {
 						%>
-							<a class="custom-btn custom-btn-success" href="update?pageNumber=<%= i + 1 %>"><%= i + 1 %></a>
+							<a class="custom-btn custom-btn-success" href="event?pageNumber=<%= i + 1 %>"><%= i + 1 %></a>
 						<%
 							}
 						%>
 						<%
 							if(pageNumber == 1) {
 						%>
-						<a class="custom-btn custom-btn-success" href="update?pageNumber=<%= pageNumber + 1 %>">&gt;&gt;</a>
+						<a class="custom-btn custom-btn-success" href="event?pageNumber=<%= pageNumber + 1 %>">&gt;&gt;</a>
 						<%
 							}
 						%>
@@ -169,7 +162,6 @@
 	
 	
 	<jsp:include page="/WEB-INF/fragment/footer.jsp"/>
-
 
 	<!--===============================================================================================-->
 	<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -207,13 +199,9 @@
 	</script>
 	<!--===============================================================================================-->
 	<script>
-		// 마우스 이벤트 리스너 등록
 		const ul = document.querySelector("ul.test");
 		ul.addEventListener("mousemove", (event) => {
-			// 마우스가 올라가있는 <li> 요소 가져오기
 			const li = event.target.closest("li");
-		
-			// <span>의 left 값 설정
 			const span = document.querySelector(".mnb_line");
 			
 			if(li.textContent === "업데이트") {
@@ -226,7 +214,6 @@
 				span.style.left = li.offsetLeft + 30 + "px";
 				span.style.width = 60 + "px";
 			}
-			
 		});
 	</script>
 </body>

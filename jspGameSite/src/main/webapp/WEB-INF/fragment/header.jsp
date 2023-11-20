@@ -21,7 +21,7 @@
 	<header class="header-v4">
 		<div class="container-menu-desktop">
 			<div class="top-bar">
-				<div class="flex-sb-m h-full container">
+				<div class="flex-sb-m h-full">
 					<div class="wrap-icon-header flex-w flex-l-m">
 						<div
 							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart">

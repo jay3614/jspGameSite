@@ -21,7 +21,7 @@
 		ArrayList<Notice> noticeList = noticeDAO.getNoticeList();
 		
 		EventDAO eventDAO = new EventDAO();
-		ArrayList<Event> eventList = eventDAO.getBannerList();
+		ArrayList<Event> eventList = eventDAO.getEventList();
 		
 		Calendar cal = Calendar.getInstance();
 	    int nowYear = cal.get(Calendar.YEAR);
@@ -29,7 +29,7 @@
 	    int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 	%>
 
-	<div class="col-md-4 col-lg-3">
+	<div class="m-w-300">
 		<div class="p-t-25 m-t-8 side_board">
 			<div class="flex-sb">
 				<h4 class="mtext-112 cl2 p-b-20">뉴스</h4>

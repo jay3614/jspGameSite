@@ -8,7 +8,7 @@
 <%@page import="java.util.ArrayList"%>
 <html>
 <head>
-<title>Home</title>
+<title>noticeDetail</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -53,8 +53,6 @@
 <link rel="stylesheet" type="text/css" href="../css/util.css">
 <link rel="stylesheet" type="text/css" href="../css/main.css">
 <link rel="stylesheet" type="text/css" href="../css/myCustom.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 
 <body class="animsition">
@@ -90,151 +88,147 @@
 
 	<jsp:include page="/WEB-INF/fragment/header.jsp" />
 	
-	<section class="bg0 p-t-40 p-b-20">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-lg-9 p-b-80">
-					<div class="row p-b-10 wrap-slick3">
-						<ul class="test">
-							<li class="float-l p-l-30"><a class="clblack" href="notice">공지사항</a></li>
-							<li class="float-l p-l-30"><a class="clblack" href="update">업데이트</a></li>
-							<li class="float-l p-l-30"><a class="clblack" href="event">이벤트</a></li>
-						</ul>
-						<span class="mnb_line" style="width: 60px; left: 30px;"></span>
-					</div>
-					<div class="p-l-30">
-						<div class="customMenu p-t-30 p-b-30 bor18 flex-sb">
-							<div class="">
-								<h1>공지사항</h1>
-							</div>
-							<div class="custom_border">
-								<span class=""><a href="notice" class="">목록</a></span>
-							</div>
+	<section class="bg0 p-t-40 p-b-20 flex-c d-flex">
+		<div class="d-flex">
+			<div class="m-w-1050 p-b-80 m-r-30">
+				<div class="row p-b-10 wrap-slick3">
+					<ul class="test">
+						<li class="float-l p-l-30"><a class="clblack" href="notice">공지사항</a></li>
+						<li class="float-l p-l-30"><a class="clblack" href="update">업데이트</a></li>
+						<li class="float-l p-l-30"><a class="clblack" href="event">이벤트</a></li>
+					</ul>
+					<span class="mnb_line" style="width: 60px; left: 30px;"></span>
+				</div>
+				<div class="p-l-30">
+					<div class="customMenu p-t-30 p-b-30 bor18 flex-sb">
+						<div class="">
+							<h1>공지사항</h1>
 						</div>
-						<p class="notice_detail_title">
-							<img class="float-l m-r-7 m-t--4" src="../img/icons/notice_icon01.png"><span class=""><%= notice.getTitle() %></span>
-						</p>
-						<div class="notice_detail_time">
-							<div class="float-r">
-								<p class="float-l time_style"><img class="clock float-l" src="../img/icons/eye_new.png"><%= notice.getViewCount() %></p>
-								<p class="float-l time_style"><img class="clock float-l" src="../img/icons/sub_date_new.png">
+						<div class="custom_border">
+							<span class=""><a href="notice" class="">목록</a></span>
+						</div>
+					</div>
+					<p class="notice_detail_title">
+						<img class="float-l m-r-7 m-t--4" src="../img/icons/notice_icon01.png"><span class=""><%= notice.getTitle() %></span>
+					</p>
+					<div class="notice_detail_time">
+						<div class="float-r">
+							<p class="float-l time_style"><img class="clock float-l" src="../img/icons/eye_new.png"><%= notice.getViewCount() %></p>
+							<p class="float-l time_style"><img class="clock float-l" src="../img/icons/sub_date_new.png">
+								<%
+									int year = Integer.parseInt(notice.getDate().substring(0, 4));
+									int month = Integer.parseInt(notice.getDate().substring(5, 7));
+									int day = Integer.parseInt(notice.getDate().substring(8, 10));
+									if(year == nowYear && month == nowMonth && day == nowDay) {
+								%>
+								<%= notice.getDate().substring(11, 16)%>
+								<%
+									}else {
+								%>
+								<%= notice.getDate().substring(0, 10)%>
+								<%
+									}
+								%>
+							</p>
+						</div>
+					</div>
+					<div class="notice_detail_content">
+						<p><%= notice.getContent() %></p>
+					</div>
+					<div class="notice_detail_pageMove">
+						<ul>
+							<li>
+								<%
+									if(noticePrev == null) {	// noticeId의 이전글이 없다면
+								%>
+								<p class="page_move_btn">
+									<img class="clock3 float-l" src="../img/icons/page_up.png">이전글
+								</p>
+								<p class="float-l">
+									이전글이 없습니다.
+								</p>
+								<%
+									}else {	// noticeId의 이전글이 있다면
+								%>
+								<a class="page_move_btn" href="noticeDetail?id=<%= noticePrev.getId() %>">
+									<img class="clock3 float-l" src="../img/icons/page_up.png">이전글
+								</a>
+								<a class="float-l" href="noticeDetail?id=<%= noticePrev.getId() %>">
+									<%= noticePrev.getTitle() %>
+								</a>
+								<p class="fs-12 time_style float-r"><img class="clock2 float-l" src="../img/icons/sub_date_new.png">
 									<%
-										int year = Integer.parseInt(notice.getDate().substring(0, 4));
-										int month = Integer.parseInt(notice.getDate().substring(5, 7));
-										int day = Integer.parseInt(notice.getDate().substring(8, 10));
-										if(year == nowYear && month == nowMonth && day == nowDay) {
+									int yearP = Integer.parseInt(noticePrev.getDate().substring(0, 4));
+									int monthP = Integer.parseInt(noticePrev.getDate().substring(5, 7));
+									int dayP = Integer.parseInt(noticePrev.getDate().substring(8, 10));
+									if(yearP == nowYear && monthP == nowMonth && dayP == nowDay) {
 									%>
-									<%= notice.getDate().substring(11, 16)%>
+									<%= noticePrev.getDate().substring(11, 16)%>
 									<%
 										}else {
 									%>
-									<%= notice.getDate().substring(0, 10)%>
+									<%= noticePrev.getDate().substring(0, 10)%>
 									<%
 										}
 									%>
 								</p>
-							</div>
-						</div>
-						<div class="notice_detail_content">
-							<p><%= notice.getContent() %></p>
-						</div>
-						<div class="notice_detail_pageMove">
-							<ul>
-								<li>
-									<%
-										if(noticePrev == null) {	// noticeId의 이전글이 없다면
-									%>
-									<p class="page_move_btn">
-										<img class="clock3 float-l" src="../img/icons/page_up.png">이전글
-									</p>
-									<p class="float-l">
-										이전글이 없습니다.
-									</p>
-									<%
-										}else {	// noticeId의 이전글이 있다면
-									%>
-									<a class="page_move_btn" href="noticeDetail?id=<%= noticePrev.getId() %>">
-										<img class="clock3 float-l" src="../img/icons/page_up.png">이전글
-									</a>
-									<a class="float-l" href="noticeDetail?id=<%= noticePrev.getId() %>">
-										<%= noticePrev.getTitle() %>
-									</a>
-									<p class="fs-12 time_style float-r"><img class="clock2 float-l" src="../img/icons/sub_date_new.png">
-										<%
-										int yearP = Integer.parseInt(noticePrev.getDate().substring(0, 4));
-										int monthP = Integer.parseInt(noticePrev.getDate().substring(5, 7));
-										int dayP = Integer.parseInt(noticePrev.getDate().substring(8, 10));
-										if(yearP == nowYear && monthP == nowMonth && dayP == nowDay) {
-										%>
-										<%= noticePrev.getDate().substring(11, 16)%>
-										<%
-											}else {
-										%>
-										<%= noticePrev.getDate().substring(0, 10)%>
-										<%
-											}
-										%>
-									</p>
-									<%
-										}
-									%>
-								</li>
-								<li>
-									<%
-										if(noticeNext == null) {	// noticeId의 다음글이 없다면
-									%>
-									<p class="page_move_btn">
+								<%
+									}
+								%>
+							</li>
+							<li>
+								<%
+									if(noticeNext == null) {	// noticeId의 다음글이 없다면
+								%>
+								<p class="page_move_btn">
+									<img class="clock3 float-l" src="../img/icons/page_down.png">다음글
+								</p>
+								<p class="float-l">
+									다음글이 없습니다.
+								</p>
+								<%
+									}else {	// noticeId의 이전글이 있다면
+								%>
+								<p class="page_move_btn">
+									<a href="noticeDetail?id=<%= noticeNext.getId() %>">
 										<img class="clock3 float-l" src="../img/icons/page_down.png">다음글
-									</p>
-									<p class="float-l">
-										다음글이 없습니다.
-									</p>
-									<%
-										}else {	// noticeId의 이전글이 있다면
-									%>
-									<p class="page_move_btn">
-										<a href="noticeDetail?id=<%= noticeNext.getId() %>">
-											<img class="clock3 float-l" src="../img/icons/page_down.png">다음글
-										</a>
-									</p>
-									<a class="float-l" href="noticeDetail?id=<%= noticeNext.getId() %>">
-										<%= noticeNext.getTitle() %>
 									</a>
-									<p class="fs-12 time_style float-r"><img class="clock2 float-l" src="../img/icons/sub_date_new.png">
-										<%
-										int yearN = Integer.parseInt(noticeNext.getDate().substring(0, 4));
-										int monthN = Integer.parseInt(noticeNext.getDate().substring(5, 7));
-										int dayN = Integer.parseInt(noticeNext.getDate().substring(8, 10));
-										if(yearN == nowYear && monthN == nowMonth && dayN == nowDay) {
-										%>
-										<%= noticeNext.getDate().substring(11, 16)%>
-										<%
-											}else {
-										%>
-										<%= noticeNext.getDate().substring(0, 10)%>
-										<%
-											}
-										%>
-									</p>
+								</p>
+								<a class="float-l" href="noticeDetail?id=<%= noticeNext.getId() %>">
+									<%= noticeNext.getTitle() %>
+								</a>
+								<p class="fs-12 time_style float-r"><img class="clock2 float-l" src="../img/icons/sub_date_new.png">
+									<%
+									int yearN = Integer.parseInt(noticeNext.getDate().substring(0, 4));
+									int monthN = Integer.parseInt(noticeNext.getDate().substring(5, 7));
+									int dayN = Integer.parseInt(noticeNext.getDate().substring(8, 10));
+									if(yearN == nowYear && monthN == nowMonth && dayN == nowDay) {
+									%>
+									<%= noticeNext.getDate().substring(11, 16)%>
+									<%
+										}else {
+									%>
+									<%= noticeNext.getDate().substring(0, 10)%>
 									<%
 										}
 									%>
-								</li>
-							</ul>
-						</div>
+								</p>
+								<%
+									}
+								%>
+							</li>
+						</ul>
 					</div>
 				</div>
-				
-				<jsp:include page="/WEB-INF/fragment/side.jsp"/>
-				
 			</div>
+			
+			<jsp:include page="/WEB-INF/fragment/side.jsp"/>
+			
 		</div>
 	</section>
 	
 	<jsp:include page="/WEB-INF/fragment/footer.jsp"/>
 
-	<!--===============================================================================================-->
-	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 	<!--===============================================================================================-->
 	<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
@@ -271,13 +265,9 @@
 	</script>
 	<!--===============================================================================================-->
 	<script>
-		// 마우스 이벤트 리스너 등록
 		const ul = document.querySelector("ul.test");
 		ul.addEventListener("mousemove", (event) => {
-			// 마우스가 올라가있는 <li> 요소 가져오기
 			const li = event.target.closest("li");
-		
-			// <span>의 left 값 설정
 			const span = document.querySelector(".mnb_line");
 			
 			if(li.textContent === "업데이트") {
@@ -289,21 +279,6 @@
 			}else if(li.textContent === "공지사항") {
 				span.style.left = li.offsetLeft + 30 + "px";
 				span.style.width = 60 + "px";
-			}
-			
-		});
-	</script>
-	<!--===============================================================================================-->
-	<script>
-		const swiper = new Swiper('.swiper', {
-			loop: true,
-			
-			pagination: {
-				el: '.swiper-pagination',
-			},
-			navigation: {
-				nextEl: '.swiper-button-next',
-				prevEl: '.swiper-button-prev',
 			}
 		});
 	</script>

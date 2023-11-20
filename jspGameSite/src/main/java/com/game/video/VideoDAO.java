@@ -82,7 +82,7 @@ public class VideoDAO {
 	
 	public ArrayList<Video> getList() {
 		
-		String SQL = "SELECT id, title, writer, youtubeLink, viewCount, date FROM video ORDER BY id ASC";
+		String SQL = "SELECT id, title, writer, youtubeLink, viewCount, date FROM video ORDER BY id DESC";
 		
 		ArrayList<Video> list = new ArrayList<Video>();
 		

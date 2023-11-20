@@ -62,7 +62,7 @@
 <body class="animsition">
 	<%
 		EventDAO eventDAO = new EventDAO();
-		ArrayList<Event> eventList = eventDAO.getBannerList();
+		ArrayList<Event> eventList = eventDAO.getEventList();
 		
 		NoticeDAO noticeDAO = new NoticeDAO();
 		ArrayList<Notice> noticeList = noticeDAO.getNoticeList();
@@ -161,7 +161,7 @@
 			<h2>영상<img class="icon" src="img/icons/icon-plus.png" alt="plus button"></h2>
 			
 			<%
-				for(int i = 0; i < videoList.size(); i++) {
+				for(int i = 0; i < 4; i++) {
 			%>
 			<div class="screenshot">
 				<div class="bg0 media-video">
@@ -184,7 +184,7 @@
 			
 			<!-- 스크린샷으로 고쳐야함 -->
 			<%
-				for(int i = 0; i < videoList.size(); i++) {
+				for(int i = 0; i < 4; i++) {
 			%>
 			<div class="screenshot">
 				<div class="bg0 media-video">

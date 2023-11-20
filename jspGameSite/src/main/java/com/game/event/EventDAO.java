@@ -108,8 +108,8 @@ public class EventDAO {
 		
 	}
 	
-	public ArrayList<Event> getBannerList() {
-		String SQL = "SELECT id, title, image FROM event ORDER BY id ASC";
+	public ArrayList<Event> getEventList() {
+		String SQL = "SELECT id, title, image, eventRange FROM event ORDER BY id ASC";
 		
 		ArrayList<Event> list = new ArrayList<Event>();
 		
@@ -123,6 +123,7 @@ public class EventDAO {
 				event.setId(rs.getLong(1));
 				event.setTitle(rs.getString(2));
 				event.setImage(rs.getString(3));
+				event.setEventRange(rs.getString(4));
 				
 				list.add(event);
 			}

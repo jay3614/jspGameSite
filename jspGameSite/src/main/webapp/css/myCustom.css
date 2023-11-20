@@ -40,9 +40,7 @@
       -ms-user-select: none;
           user-select: none;
   border: 1px solid transparent;
-  /* padding: 0.25rem; */
   font-size: 1rem;
-  /* line-height: 1.25; */
   border-radius: 0.25rem;
   transition: all 0.15s ease-in-out;
 }
@@ -58,6 +56,18 @@
   background-color: rgb(170, 170, 170);
   border-color: rgb(0, 0, 0);
 }
+
+.m-w-1050 {
+	min-width: 1050px;
+	width: 1050px;
+}
+
+.m-w-300 {
+	min-width: 300px;
+	width: 300px;
+}
+
+
 
 .mnb_line {
     position: absolute;
@@ -161,4 +171,15 @@
 
 .hov-ul:hover {
 	text-decoration: underline;
+}
+
+.event-div {
+	border: 1px solid #e6e6e6;
+	width: 291px;
+	display: flex;
+	justify-content: center;
+}
+
+.event-div2 {
+	border-top: 1px solid #e6e6e6;
 }
