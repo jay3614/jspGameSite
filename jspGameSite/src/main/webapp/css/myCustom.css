@@ -1,3 +1,5 @@
+/* [ swiper ] */
+
 .swiper {
 	width: 1350px;
 	height: 350px;
@@ -28,7 +30,6 @@
 	font-weight: 600 !important;
 }
 
-
 .custom-btn {
   display: inline-block;
   font-weight: normal;
@@ -57,16 +58,262 @@
   border-color: rgb(0, 0, 0);
 }
 
+
+/* [header 섹션 css] */
+img.top-menu {
+	width: 70px;;
+	height: 30px;
+}
+
+
+/* [event 섹션 css] */
+.eventSection {
+	min-width: 1500px;
+}
+
+
+/* [notice 섹션 css] */
+.noticeSection {
+	margin-bottom: 30px;
+	min-width: 1500px;
+}
+
+.notice {
+	margin-left: 12%;
+	margin-bottom: 30px;
+}
+
+.notice div {
+	margin-right: 80px;
+	width: 25%;
+	min-width: 200px;
+}
+
+div.notice1 a.title {
+	font-size: 25px;
+	color: black;
+}
+
+div.notice1 p.content {
+	font-size: 15px;
+	border-top: dotted 2px;
+	margin-top: 10px;
+	padding-top: 10px;
+}
+
+div.notice p.type {
+	font-size: 15px;
+	color: white;
+	background-color: rgb(93, 122, 203);
+	padding: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 30px;
+	display: inline-block;
+}
+
+div.notice2 a.title {
+	font-size: 25px;
+	color: black;
+}
+
+div.notice2 p.content {
+	font-size: 15px;
+	border-top: dotted 2px;
+	margin-top: 10px;
+	padding-top: 10px;
+}
+
+div.notice3 span.type {
+	font-size: 15px;
+	color: white;
+	background-color: rgb(93, 122, 203);
+	padding: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 30px;
+	display: inline-block;
+}
+
+div.notice3 a.title {
+	color: black;
+	font-size: 20px;
+}
+
+.notice3 ul li {
+	border-bottom: solid 1px rgb(144, 144, 144);
+	margin-top: 10px;
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+}
+
+.notice3 ul li:last-child {
+    border-bottom: none;
+}
+
+
+/** 가이드 섹션 **/
+.guide {
+	min-width: 1500px;
+}
+
+.guideSection {
+	display: flex;
+	justify-content: center;
+}
+
+div.guide1 {
+	margin-right: 50px;
+	width: 300px;
+	font-size: 28px;
+	color: #333333;
+}
+
+div.guide1 p {
+	margin-bottom: 15px;
+}
+
+div.guide2 {
+	margin-right: 50px;
+	width: 300px;
+}
+
+div.guide3 {
+	margin-right: 50px;
+	width: 300px;
+}
+
+div.guide4 {
+	width: 300px;
+}
+
+
+/** 미디어 섹션 **/
+.media {
+	padding-left: 50px;
+	min-width: 1500px;
+	display: flex;
+	justify-content: center;
+}
+
+.mediaSection a {
+	color: black;
+}
+
+.mediaSection img.icon {
+	width: 35px;
+	height: 35px;
+}
+
+.mediaSection h2, .mediaSection img{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.mediaSection div.media-video {
+	height: 295px;
+	margin-bottom: 30px;
+}
+
+.mediaSection div.screenshot {
+	display: inline-block;
+	margin-right: 15px;
+}
+
+.mediaSection div.media-screenshot {
+	height: 295px;
+}
+
+
+/* [footer 섹션 css] */
+.footer_info{
+	width: 100%;
+}
+.footer_info p{
+	width: 100%;
+}
+
+.footer_info ul li:first-child{
+	padding-left: 0px;
+	background: none;
+}
+
+.footer_info ul li{
+	float: left;
+	padding: 0 13px;
+	font-size: 12px;
+	background: url('../img/icons/footer_line.png') no-repeat;
+}
+
+.footer_info ul li a{
+	color: #b2b2b2;
+}
+
+
+/* [ register ]*/
+
+.register__input {
+  margin-bottom: 6px;
+}
+
+.register__input p {
+  color: #111111;
+  margin-bottom: 12px;
+}
+
+.register__input input {
+  height: 40px;
+  border: 1px solid #e1e1e1;
+  font-size: 14px;
+  color: #b7b7b7;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.h-20-im input {
+	height: 20px !important;
+}
+
+/* [ 게시판 CSS ]*/
 .m-w-1050 {
 	min-width: 1050px;
 	width: 1050px;
 }
 
-.m-w-300 {
-	min-width: 300px;
-	width: 300px;
+.m-w-930 {
+	min-width: 930px;
+	width: 930px;
 }
 
+.m-w-800 {
+	min-width: 800px;
+	width: 800px;
+}
+
+.m-w-620 {
+	min-width: 620px;
+	width: 620px;
+}
+
+.m-w-310 {
+	min-width: 310px;
+	width: 310px;
+}
+
+.m-w-285 {
+	min-width: 285px;
+	width: 285px;
+}
+
+.m-w-130 {
+	min-width: 130px;
+	width: 130px;
+}
+
+.m-auto {
+	margin: auto;
+}
 
 
 .mnb_line {

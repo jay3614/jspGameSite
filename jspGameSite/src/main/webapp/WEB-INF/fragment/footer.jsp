@@ -47,10 +47,10 @@
 						운영시간 평일 11:00 - 18:00 (토∙일, 공휴일 휴무) 점심시간 평일
 						13:00 - 14:00 <b>1:1 문의하기는 게시판을 이용해 주세요</b>
 					</p>
-					<p>SpringBoot personal project All Rights Reserved</p>
+					<p>© SpringBoot personal project All Rights Reserved</p>
 					<div class="p-t-27">
 						<a href="https://github.com/jay3614/jspGameSite" target="_blank">
-							<img src="../img/icons/logo2.png" alt="COMPANY-LOGO">
+							<img src="${pageContext.request.contextPath}/img/icons/logo2.png" alt="COMPANY-LOGO">
 						</a>
 					</div>
 				</div>

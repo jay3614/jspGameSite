@@ -146,7 +146,7 @@ public class NoticeDAO {
 	// index 페이지용 공지사항 리스트
 	public ArrayList<Notice> getNoticeAfter() {
 		
-		String SQL = "SELECT title FROM notice WHERE types = '공지' ORDER BY id DESC LIMIT 1, 5";
+		String SQL = "SELECT id, title FROM notice WHERE types = '공지' ORDER BY id DESC LIMIT 1, 5";
 		
 		ArrayList<Notice> list = new ArrayList<Notice>();
 		
@@ -157,7 +157,8 @@ public class NoticeDAO {
 			while(rs.next()) {
 				Notice notice = new Notice();
 				
-				notice.setTitle(rs.getString(1));
+				notice.setId(rs.getLong(1));
+				notice.setTitle(rs.getString(2));
 				
 				list.add(notice);
 			}
@@ -209,6 +210,7 @@ public class NoticeDAO {
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, (pageNumber - 1) * 10);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {

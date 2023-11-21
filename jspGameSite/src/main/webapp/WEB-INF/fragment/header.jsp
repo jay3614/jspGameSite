@@ -21,7 +21,7 @@
 	<header class="header-v4">
 		<div class="container-menu-desktop">
 			<div class="top-bar">
-				<div class="flex-sb-m h-full">
+				<div class="flex-sb-m">
 					<div class="wrap-icon-header flex-w flex-l-m">
 						<div
 							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart">
@@ -42,7 +42,7 @@
 						<%
 							}else {
 						%>
-						<a href="${pageContext.request.contextPath}/logoutAction.jsp" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
+						<a href="${pageContext.request.contextPath}/logoutAction" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
 						<%
 							}
 						%>

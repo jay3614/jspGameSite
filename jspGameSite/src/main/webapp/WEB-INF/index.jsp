@@ -107,13 +107,13 @@
 		<div class="row notice">
 			<div class="notice1">
 				<p class="type"><%= updateList.get(0).getTypes() %></p><br>
-				<a class="title" href="#"><%= updateList.get(0).getTitle() %></a>
+				<a class="title" href="news/updateDetail?id=<%= updateList.get(0).getId() %>"><%= updateList.get(0).getTitle() %></a>
 				<p class="content"><%= updateList.get(0).getContent() %></p>
 			</div>
 			
 			<div class="notice2">
  				<p class="type"><%= noticeList.get(0).getTypes() %></p><br>
-				<a class="title" href="#"><%= noticeList.get(0).getTitle() %></a>
+				<a class="title" href="news/noticeDetail?id=<%= noticeList.get(0).getId() %>"><%= noticeList.get(0).getTitle() %></a>
 				<p class="content"><%= noticeList.get(0).getContent() %></p>
 			</div>
 			<div class="notice3">
@@ -123,7 +123,7 @@
 					%>
 					<li>
 						<span class="type">공지</span>
-						<a class="title" href="#"><%= noticeAfterSec.get(i).getTitle() %></a>
+						<a class="title" href="news/noticeDetail?id=<%= noticeAfterSec.get(i).getId() %>"><%= noticeAfterSec.get(i).getTitle() %></a>
 					</li>
 					<%
 						}

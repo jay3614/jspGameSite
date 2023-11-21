@@ -1,7 +1,7 @@
+<!DOCTYPE html>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@page import="com.game.event.Event"%>
 <%@page import="com.game.event.EventDAO"%>
 <%@page import="com.game.notice.Notice"%>
@@ -9,9 +9,6 @@
 <%@page import="java.util.ArrayList"%>
 <html>
 <head>
-<title>Home</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 
@@ -29,7 +26,7 @@
 	    int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 	%>
 
-	<div class="m-w-300">
+	<div class="m-w-285">
 		<div class="p-t-25 m-t-8 side_board">
 			<div class="flex-sb">
 				<h4 class="mtext-112 cl2 p-b-20">뉴스</h4>
@@ -61,7 +58,7 @@
 						%>
 						<div class="swiper-slide">
 							<a href="#"><img class="event-img" id="event-img" src="<%=eventList.get(i).getImage() %>" style="width: 285px; height: 120px"></a>
-							<p class="text-truncate"><%= eventList.get(i).getTitle() %></p>
+							<p class="text-truncate m-t-10"><%= eventList.get(i).getTitle() %></p>
 							<p><%= i + 1 %>/<%= eventList.size() %></p>
 						</div>
 						<%

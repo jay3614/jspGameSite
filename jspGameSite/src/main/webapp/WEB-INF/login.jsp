@@ -12,30 +12,24 @@
 </head>
 <body>
 	
-	<div class="container">
-		<div class="row d-flex justify-content-center">
-			<div class="login-wrapper">
-				<div class="login-header">
-					<h1 class="logo">
-						<a href="index"><img src="img/icons/logo1.png"></a>
-					</h1>
-				</div>
-				<form method="post" action="loginAction.jsp" id="login-form">
-					<input type="text" class="form-control" name="id" id="id" placeholder="ID(이메일)">
-					<input type="password" class="form-control" name="password" id="password" placeholder="비밀번호">
-					<input type="submit" value="로그인">
-				</form>
+	<div class="login-wrapper">
+		<div class="login-header m-b-20">
+			<a href="index"><img src="img/icons/logo1.png"></a>
+		</div>
+		<form method="post" action="loginAction" id="login-form">
+			<input type="text" class="form-control" name="id" id="id" placeholder="ID(이메일)">
+			<input type="password" class="form-control" name="password" id="password" placeholder="비밀번호">
+			<input type="submit" value="로그인">
+		</form>
 
-				<ul class="login-box">
-					<li class="login-list"><a href="register" class="login-link trans-04">회원가입</a></li>
-					<li class="login-list"><a href="findId" class="login-link trans-04">아이디 찾기</a></li>
-					<li class="login-list"><a href="findPassword" class="login-link trans-04"> 비밀번호 찾기</a></li>
-				</ul>
-				<div class="social-login">
-					<button type="button" onclick="location.href='#'"><img src="img/icons/google.svg"><span class="icon">Google 계정으로 로그인</span></button>
-					<button type="button" onclick="location.href='#'"><img src="img/icons/naver.svg"><span class="icon">Naver 계정으로 로그인</span></button>
-				</div>
-			</div>
+		<ul class="login-box">
+			<li class="login-list"><a href="register" class="login-link trans-04">회원가입</a></li>
+			<li class="login-list"><a href="findId" class="login-link trans-04">아이디 찾기</a></li>
+			<li class="login-list"><a href="findPassword" class="login-link trans-04"> 비밀번호 찾기</a></li>
+		</ul>
+		<div class="social-login">
+			<button type="button" onclick="location.href='#'"><img src="img/icons/google.svg"><span class="icon">Google 계정으로 로그인</span></button>
+			<button type="button" onclick="location.href='#'"><img src="img/icons/naver.svg"><span class="icon">Naver 계정으로 로그인</span></button>
 		</div>
 	</div>
 	<div class="login-footer">

@@ -1,8 +1,8 @@
+<!DOCTYPE html>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@page import="com.game.notice.Notice"%>
 <%@page import="com.game.notice.NoticeDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -71,14 +71,13 @@
 		script.println("</script>");
 	}
 	
+	// 공지 타입만 나오도록 수정 필요
 	Notice notice = new NoticeDAO().getNotice(noticeId);
 	Notice noticePrev = new NoticeDAO().getNotice(noticeId + 1);
 	Notice noticeNext = new NoticeDAO().getNotice(noticeId - 1);
 	
-	// 아직 미사용
 	NoticeDAO noticeDAO = new NoticeDAO();
 	ArrayList<Notice> noticeList = noticeDAO.getNoticeList();
-	//
 	
 	Calendar cal = Calendar.getInstance();
     int nowYear = cal.get(Calendar.YEAR);

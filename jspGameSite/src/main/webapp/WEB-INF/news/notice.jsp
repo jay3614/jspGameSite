@@ -1,7 +1,7 @@
+<!DOCTYPE html>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@page import="com.game.notice.Notice"%>
 <%@page import="com.game.notice.NoticeDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -79,97 +79,101 @@
 
 	<jsp:include page="/WEB-INF/fragment/header.jsp" />	
 	
-	<section class="bg0 p-t-40 p-b-20 d-flex">
+	<section class="bg0 p-t-40 p-b-20">
 		<div class="d-flex">
-			<div class="m-w-1050 p-b-80 m-r-30">
-				<div class="row p-b-10 wrap-slick3">
-					<ul class="test">
-						<li class="float-l p-l-30"><a class="clblack" href="notice">공지사항</a></li>
-						<li class="float-l p-l-30"><a class="clblack" href="update">업데이트</a></li>
-						<li class="float-l p-l-30"><a class="clblack" href="event">이벤트</a></li>
-					</ul>
-					<span class="mnb_line" style="width: 60px; left: 30px;"></span>
-				</div>
-				<div class="customMenu p-t-30 p-b-30 bor18">
-					<div class="col-lg-8">
-						<h1>공지사항</h1>
+			<div class="d-flex m-auto">
+				<div class="m-w-930 p-b-80 m-r-30">
+					<div class="row p-b-10 wrap-slick3">
+						<ul class="test">
+							<li class="float-l p-l-30"><a class="clblack" href="notice">공지사항</a></li>
+							<li class="float-l p-l-30"><a class="clblack" href="update">업데이트</a></li>
+							<li class="float-l p-l-30"><a class="clblack" href="event">이벤트</a></li>
+						</ul>
+						<span class="mnb_line" style="width: 60px; left: 30px;"></span>
 					</div>
-					<div class="col-lg-4">
-						<div class="bor17 of-hidden pos-relative">
-							<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55"
-								type="text" name="search" placeholder="Search">
-		
-							<button
-								class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-								<i class="zmdi zmdi-search"></i>
-							</button>
+					<div class="customMenu p-t-30 p-b-30 bor18">
+						<div class="m-w-620">
+							<h1>공지사항</h1>
+						</div>
+						<div class="m-w-310">
+							<div class="bor17 of-hidden pos-relative">
+								<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55"
+									type="text" name="search" placeholder="Search">
+			
+								<button
+									class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
+									<i class="zmdi zmdi-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				
+					<table class="table bor18">
+						<tbody>
+							<%
+								ArrayList<Notice> list = noticeDAO.getNoticeList(pageNumber);
+								for(int i = 0; i < list.size(); i++) {
+									
+							%>
+							<tr class="txt-middle">
+								<td class="m-w-800">
+									<a class="clblack" href="noticeDetail?id=<%= list.get(i).getId() %>">
+										<img class="float-l p-l-27 m-r-10" src="../img/icons/notice_icon01.png"><%= list.get(i).getTitle() %>
+									</a>
+								</td>
+								<td class="m-w-130">
+									<img class="float-l m-t-5" src="../img/icons/sub_date_new.png" alt="시계 아이콘">&nbsp;
+									<%
+										int year = Integer.parseInt(list.get(i).getDate().substring(0, 4));
+										int month = Integer.parseInt(list.get(i).getDate().substring(5, 7));
+										int day = Integer.parseInt(list.get(i).getDate().substring(8, 10));
+										if(year == nowYear && month == nowMonth && day == nowDay) {	// 현재날짜와 같다면 날짜가 아닌 시간 표시
+									%>
+									<%= list.get(i).getDate().substring(11, 16)%>
+									<%
+										}else {
+									%>
+									<%= list.get(i).getDate().substring(0, 10)%>
+									<%
+										}
+									%>
+								</td>
+							</tr>
+							<%
+								}
+							%>
+						</tbody>
+					</table>
+					<div class="product__pagination">
+						<div class="pagination h-100 justify-content-center align-items-center">
+							<%
+								if(pageNumber != 1) {
+							%>
+							<a class="custom-btn custom-btn-success" href="notice?pageNumber=<%= pageNumber - 1 %>">&lt;&lt;</a>
+							<%
+								}
+							%>
+							<%
+								for(int i = 0; i < (noticeList.size() + 1) / 10 + 1; i++) {
+							%>
+								<a class="custom-btn custom-btn-success" href="notice?pageNumber=<%= i + 1 %>"><%= i + 1 %></a>
+							<%
+								}
+							%>
+							<%
+								if(pageNumber == 1) {
+							%>
+							<a class="custom-btn custom-btn-success" href="notice?pageNumber=<%= pageNumber + 1 %>">&gt;&gt;</a>
+							<%
+								}
+							%>
 						</div>
 					</div>
 				</div>
-			
-				<table class="table bor18">
-					<tbody>
-						<%
-							ArrayList<Notice> list = noticeDAO.getNoticeList(pageNumber);
-							for(int i = 0; i < list.size(); i++) {
-								
-						%>
-						<tr>
-							<td class="col-lg-9">
-								<a class="clblack" href="noticeDetail?id=<%= list.get(i).getId() %>"><%= list.get(i).getTitle() %></a>
-							</td>
-							<td class="col-lg-3">
-								<img class="float-l mt-1" src="../img/icons/sub_date_new.png" alt="시계 아이콘">&nbsp;
-								<%
-									int year = Integer.parseInt(list.get(i).getDate().substring(0, 4));
-									int month = Integer.parseInt(list.get(i).getDate().substring(5, 7));
-									int day = Integer.parseInt(list.get(i).getDate().substring(8, 10));
-									if(year == nowYear && month == nowMonth && day == nowDay) {	// 현재날짜와 같다면 날짜가 아닌 시간 표시
-								%>
-								<%= list.get(i).getDate().substring(11, 16)%>
-								<%
-									}else {
-								%>
-								<%= list.get(i).getDate().substring(0, 10)%>
-								<%
-									}
-								%>
-							</td>
-						</tr>
-						<%
-							}
-						%>
-					</tbody>
-				</table>
-				<div class="product__pagination">
-					<div class="pagination h-100 justify-content-center align-items-center">
-						<%
-							if(pageNumber != 1) {
-						%>
-						<a class="custom-btn custom-btn-success" href="notice?pageNumber=<%= pageNumber - 1 %>">&lt;&lt;</a>
-						<%
-							}
-						%>
-						<%
-							for(int i = 0; i < (noticeList.size() + 1) / 10 + 1; i++) {
-						%>
-							<a class="custom-btn custom-btn-success" href="notice?pageNumber=<%= i + 1 %>"><%= i + 1 %></a>
-						<%
-							}
-						%>
-						<%
-							if(pageNumber == 1) {
-						%>
-						<a class="custom-btn custom-btn-success" href="notice?pageNumber=<%= pageNumber + 1 %>">&gt;&gt;</a>
-						<%
-							}
-						%>
-					</div>
-				</div>
+				
+				<jsp:include page="/WEB-INF/fragment/side.jsp"/>
+				
 			</div>
-			
-			<jsp:include page="/WEB-INF/fragment/side.jsp"/>
-			
 		</div>
 	</section>
 	
