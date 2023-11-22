@@ -89,7 +89,7 @@
 	
 	<section class="bg0 p-t-40 p-b-20 flex-c d-flex">
 		<div class="d-flex">
-			<div class="m-w-1050 p-b-80 m-r-30">
+			<div class="m-w-930 p-b-80 m-r-30">
 				<div class="row p-b-10 wrap-slick3">
 					<ul class="test">
 						<li class="float-l p-l-30"><a class="clblack" href="notice">공지사항</a></li>
@@ -100,11 +100,11 @@
 				</div>
 				<div class="p-l-30">
 					<div class="customMenu p-t-30 p-b-30 bor18 flex-sb">
-						<div class="">
+						<div>
 							<h1>업데이트</h1>
 						</div>
 						<div class="custom_border">
-							<span class=""><a href="notice" class="">목록</a></span>
+							<span><a href="notice">목록</a></span>
 						</div>
 					</div>
 					<p class="notice_detail_title"><%= update.getTitle() %>

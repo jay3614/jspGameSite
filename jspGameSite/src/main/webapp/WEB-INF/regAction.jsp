@@ -46,7 +46,6 @@
 			script.println("history.back()");
 			script.println("</script>");
 		} else if(!member.getName().matches("^[가-힣]+$")) {	// 이름이 한글만 포함하고 있는지 검사
-			System.out.println(member.getName());
 			script.println("<script>");
 			script.println("alert('이름은 한글만 입력 가능합니다.')");
 			script.println("history.back()");

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -7,7 +8,7 @@
 <%@page import="java.util.ArrayList"%>
 <html>
 <head>
-<title>event</title>
+<title>eventDetail</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -49,22 +50,32 @@
 <link rel="stylesheet" type="text/css"
 	href="../vendor/owl Carousel/owl.carousel.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="../css/util.css?after">
-<link rel="stylesheet" type="text/css" href="../css/main.css?after">
-<link rel="stylesheet" type="text/css" href="../css/myCustom.css?after">
-<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="../css/util.css">
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<link rel="stylesheet" type="text/css" href="../css/myCustom.css">
 </head>
 
 <body class="animsition">
 <%
-	int pageNumber = 1;
+	int eventId = 0;
 	
-	if(request.getParameter("pageNumber") != null) {
-		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+	if(request.getParameter("id") != null) {
+		eventId = Integer.parseInt(request.getParameter("id"));
 	}
 	
-	EventDAO eventeDAO = new EventDAO();
-	ArrayList<Event> eventList = eventeDAO.getEventList();
+	if(eventId == 0) {
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('유효하지 않은 글입니다.')");
+		script.println("location.href = 'notice'");
+		script.println("</script>");
+	}
+	
+	// 공지 타입만 나오도록 수정 필요
+	Event event = new EventDAO().getEvent(eventId);
+	
+	EventDAO eventDAO = new EventDAO();
+	ArrayList<Event> noticeList = eventDAO.getEventList();
 	
 	Calendar cal = Calendar.getInstance();
     int nowYear = cal.get(Calendar.YEAR);
@@ -76,94 +87,50 @@
 	
 	<section class="bg0 p-t-40 p-b-20 flex-c d-flex">
 		<div class="d-flex">
-			<div class="m-w-1050 p-b-80 m-r-30">
+			<div class="m-w-930 p-b-80 m-r-30">
 				<div class="row p-b-10 wrap-slick3">
 					<ul class="test">
 						<li class="float-l p-l-30"><a class="clblack" href="notice">공지사항</a></li>
 						<li class="float-l p-l-30"><a class="clblack" href="update">업데이트</a></li>
 						<li class="float-l p-l-30"><a class="clblack" href="event">이벤트</a></li>
 					</ul>
-					<span class="mnb_line" style="width: 45px; left: 210px;"></span>
+					<span class="mnb_line" style="width: 60px; left: 210px;"></span>
 				</div>
-				<div class="customMenu p-t-30 p-b-30 bor18">
-					<div class="m-w-620">
-						<h1>이벤트</h1>
-					</div>
-					<div class="m-w-310">
-						<div class="bor17 of-hidden pos-relative">
-							<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55"
-								type="text" name="search" placeholder="Search">
-		
-							<button
-								class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-								<i class="zmdi zmdi-search"></i>
-							</button>
+				<div class="p-l-30">
+					<div class="customMenu p-t-30 p-b-30 bor18 flex-sb">
+						<div>
+							<h1>이벤트</h1>
+						</div>
+						<div class="custom_border">
+							<span><a href="notice">목록</a></span>
 						</div>
 					</div>
-				</div>
-				
-				<!--  -->
-				<div class="d-flex flex-w p-l-30">
-					<%
-						for(int i = 0; i < eventList.size(); i++) {
-					%>
-					<div class="m-r-30 m-t-30 event-div">
-						<div class="bg0">
-							<div class="flex-col-l txt-center">
-								<a href="#">
-									<img src="<%= eventList.get(i).getImage() %>" style="width: 285px; height: 120px" alt="">
-								</a>
-							</div>
-							<div class="m-tb-10 txt-center">
-								<a class="cl2" href="#">
-									<%= eventList.get(i).getTitle() %>
-								</a>
-							</div>
-							<div class="d-flex flex-c event-div2">
-								<p class="cl9 m-t-15 fs-12">
-									<img class="float-l m-t-1" src="../img/icons/date_icon_new.png">&nbsp;&nbsp;<%= eventList.get(i).getEventRange() %>
-								</p>
-							</div>
+					<p class="notice_detail_title">
+						<img class="float-l m-r-7 m-t--4" src="../img/icons/notice_icon01.png"><span><%= event.getTitle() %></span>
+					</p>
+					<div class="notice_detail_time">
+						<div class="flex-sb m-lr-27">
+							<p class="float-l time_style"><img class="clock float-l" src="../img/icons/sub_date_new.png">
+								<%= event.getEventRange()%>
+							</p>
+							<p class="float-l time_style"><img class="clock float-l" src="../img/icons/eye_new.png"><%= event.getViewCount() %></p>
 						</div>
 					</div>
-					<%
-						}
-					%>
-				</div>
-				<!--  -->
-				
-				<div class="product__pagination">
-					<div class="pagination h-100 justify-content-center align-items-center">
-						<%
-							if(pageNumber != 1) {
-						%>
-						<a class="custom-btn custom-btn-success" href="event?pageNumber=<%= pageNumber - 1 %>">&lt;&lt;</a>
-						<%
-							}
-						%>
-						<%
-							for(int i = 0; i < (eventList.size() + 1) / 10 + 1; i++) {
-						%>
-							<a class="custom-btn custom-btn-success" href="event?pageNumber=<%= i + 1 %>"><%= i + 1 %></a>
-						<%
-							}
-						%>
-						<%
-							if(pageNumber == 1) {
-						%>
-						<a class="custom-btn custom-btn-success" href="event?pageNumber=<%= pageNumber + 1 %>">&gt;&gt;</a>
-						<%
-							}
-						%>
+					<div class="notice_detail_content">
+						<p><%= event.getContent() %></p>
 					</div>
+					<!-- 댓글칸 예정 -->
+					<div>
+					
+					</div>
+					<!--  -->
 				</div>
 			</div>
-
+			
 			<jsp:include page="/WEB-INF/fragment/side.jsp"/>
 			
 		</div>
 	</section>
-	
 	
 	<jsp:include page="/WEB-INF/fragment/footer.jsp"/>
 

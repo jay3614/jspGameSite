@@ -59,9 +59,9 @@ public class EventDAO {
 	}
 	
 	// 아직 미사용
-	public int write(String title, String eventRange, String content, String image, int viewCount) {
+	public int write(String title, String eventRange, String content, String image, int viewCount, String types) {
 		
-		String SQL = "INSERT INTO event VALUES (?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO event VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -71,6 +71,7 @@ public class EventDAO {
 			pstmt.setString(4, content);
 			pstmt.setString(5, image);
 			pstmt.setInt(6, viewCount);
+			pstmt.setString(7, types);
 			
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -80,7 +81,7 @@ public class EventDAO {
 	}
 	
 	public ArrayList<Event> getList() {
-		String SQL = "SELECT * FROM event ORDER BY id ASC";
+		String SQL = "SELECT * FROM event ORDER BY id DESC";
 		
 		ArrayList<Event> list = new ArrayList<Event>();
 		
@@ -97,6 +98,7 @@ public class EventDAO {
 				event.setContent(rs.getString(4));
 				event.setImage(rs.getString(5));
 				event.setViewCount(rs.getInt(6));
+				event.setTypes(rs.getString(7));
 				
 				list.add(event);
 			}
@@ -109,7 +111,7 @@ public class EventDAO {
 	}
 	
 	public ArrayList<Event> getEventList() {
-		String SQL = "SELECT id, title, image, eventRange FROM event ORDER BY id ASC";
+		String SQL = "SELECT id, title, image, eventRange FROM event ORDER BY id DESC";
 		
 		ArrayList<Event> list = new ArrayList<Event>();
 		
@@ -135,7 +137,7 @@ public class EventDAO {
 		
 	}
 	
-	// 아직 미사용
+	// 이벤트 상세
 	public Event getEvent(long id) {
 		
 		String SQL = "SELECT * FROM event WHERE id = ?";
@@ -156,6 +158,10 @@ public class EventDAO {
 				event.setImage(rs.getString(5));
 				event.setViewCount(rs.getInt(6));
 				
+				int viewCount = rs.getInt(6);
+				viewCount++;
+				countUpdate(viewCount, id);
+				
 				return event;
 			}
 		} catch (Exception e) {
@@ -165,10 +171,24 @@ public class EventDAO {
 		
 	}
 	
+	// 조회수 증가
+	public int countUpdate(int viewCount, long id) {
+		String SQL = "update event set viewCount = ? where id = ?";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setInt(1, viewCount);
+			pstmt.setLong(2, id);
+			return pstmt.executeUpdate();		
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;//데이터베이스 오류
+	}
+	
 	// 아직 미사용
-	public int update(String title, String eventRange, String content, String image) {
+	public int update(String title, String eventRange, String content, String image, String types) {
 		
-		String SQL = "UPDATE evnet SET title = ?, eventRange = ?, content = ?, image = ? WHERE id = ?";
+		String SQL = "UPDATE evnet SET title = ?, eventRange = ?, content = ?, image = ?, types = ? WHERE id = ?";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -176,6 +196,7 @@ public class EventDAO {
 			pstmt.setString(2, eventRange);
 			pstmt.setString(3, content);
 			pstmt.setString(4, image);
+			pstmt.setString(5, types);
 			
 			return pstmt.executeUpdate();
 		} catch (Exception e) {

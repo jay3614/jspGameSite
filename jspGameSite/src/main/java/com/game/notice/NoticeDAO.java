@@ -272,7 +272,7 @@ public class NoticeDAO {
 		String SQL = "update notice set viewCount = ? where id = ?";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setInt(1, viewCount);//물음표의 순서
+			pstmt.setInt(1, viewCount);
 			pstmt.setLong(2, id);
 			return pstmt.executeUpdate();		
 		} catch(Exception e) {

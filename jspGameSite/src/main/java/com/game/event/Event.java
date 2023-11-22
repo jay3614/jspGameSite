@@ -8,6 +8,7 @@ public class Event {
 	private String content;
 	private String image;
 	private int viewCount;
+	private String types;
 	
 	public Long getId() {
 		return id;
@@ -44,5 +45,11 @@ public class Event {
 	}
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
+	}
+	public String getTypes() {
+		return types;
+	}
+	public void setTypes(String types) {
+		this.types = types;
 	}
 }

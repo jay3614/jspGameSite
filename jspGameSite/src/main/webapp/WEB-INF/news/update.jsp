@@ -113,7 +113,6 @@
 							<%
 								ArrayList<Notice> list = noticeDAO.getUpdateList(pageNumber);
 								for(int i = 0; i < list.size(); i++) {
-									System.out.println(i);
 							%>
 							<tr class="txt-middle">
 								<td class="m-w-800">
@@ -125,7 +124,7 @@
 										int year = Integer.parseInt(list.get(i).getDate().substring(0, 4));
 										int month = Integer.parseInt(list.get(i).getDate().substring(5, 7));
 										int day = Integer.parseInt(list.get(i).getDate().substring(8, 10));
-										if(year == nowYear && month == nowMonth && day == nowDay) {	// 현재날짜와 같다면 날짜가 아닌 시간 표시
+										if(year == nowYear && month == nowMonth && day == nowDay) {
 									%>
 									<%= list.get(i).getDate().substring(11, 16)%>
 									<%
