@@ -151,9 +151,9 @@
 								}
 							%>
 							<%
-								for(int i = 0; i < (updateList.size() + 1) / 10 + 1; i++) {
+								for(int i = 1; i <= updateList.size() / 10 + 1; i++) {
 							%>
-								<a class="custom-btn custom-btn-success" href="update?pageNumber=<%= i + 1 %>"><%= i + 1 %></a>
+								<a class="custom-btn custom-btn-success" href="update?pageNumber=<%= i %>"><%= i %></a>
 							<%
 								}
 							%>

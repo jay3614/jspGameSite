@@ -1,3 +1,13 @@
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	border: 0;
+	text-decoration: none;
+	font-family: "NanumBarunGothic" , "Malgun Gothic" , sans-serif;
+	letter-spacing: -0.03em;
+}
+
 /* [ swiper ] */
 
 .swiper {
@@ -429,4 +439,155 @@ div.guide4 {
 
 .event-div2 {
 	border-top: 1px solid #e6e6e6;
+}
+
+
+/* [ 댓글 관련 CSS ] */
+
+.reply_wrap {
+	float: left;
+	width: 100%;
+}
+
+.reply_title {
+	float: left;
+	width: 100%;
+	height: 44px;
+	line-height: 45px;
+	border-top: 1px solid #e3e3e3;
+	background-color: #f9f9f9;
+}
+
+.reply_title h2 {
+	float: left;
+	margin-left: 27px;
+	line-height: 45px;
+	font-size: 16px;
+	color: #333333;
+}
+
+.reply_title h2 span {
+	font-size: 16px;
+	color: #f68400;
+	margin-left: 5px;
+}
+
+.reply_ul li {
+	float: left;
+	width: 876px;
+	padding: 30px 27px 25px 27px;
+	border-bottom: 1px solid #e3e3e3;
+}
+
+.reply_ul li:first-child {
+	border-top: 1px solid #e3e3e3;
+}
+
+.reply {
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+
+.reply_id {
+	width: 100%;
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 1;
+}
+
+.reply_time {
+	margin-left: 5px;
+	font-size: 12px;
+	color: #888;
+}
+
+.reply_text {
+	float: left;
+	width: 100%;
+	font-size: 13px;
+	color: #666666;
+	line-height: 20px;
+	margin-top: 11px;
+	word-break: break-all;
+	word-wrap: break-word;
+	overflow: hidden;
+}
+
+.reply_page {
+    float: left;
+    width: 100%;
+    height: 45px;
+    text-align: center;
+    padding: 16px 0 !important;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.reply_page a {
+	line-height: 1;
+	height: 12px;
+	width: auto;
+	min-width: 12px;
+	display: inline-block;
+	color: #888;
+	margin: 0 11px;
+	font-size: 13px;
+	vertical-align: top;
+	font-family: "Tahoma";
+}
+
+.reply_page a:hover, .reply_page a.active {
+	font-weight: bold;
+	color: #4a4a4a;
+}
+
+.comment_form_wrap {
+	float: left;
+	margin-top: 40px;
+	width: 100%;
+}
+
+.comment_form {
+	height: 205px;
+	background-color: #e8eaee;
+	border: 1px solid #dcdde1;
+}
+
+.comment {
+	float: left;
+	padding: 20px;
+	width: 880px;
+	height: 120px;
+	margin-top: 10px;
+	margin-left: 10px;
+	background-color: #fff;
+	resize: none;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+.comment_btn {
+	position: relative;
+	float: left;
+	margin-top: 11px;
+	width: 100%;
+	height: 42px;
+	line-height: 42px;
+}
+
+.word_count {
+	margin-right: 10px;
+}
+
+.btn01_g {
+	min-width: 53px;
+	font-size: 16px;
+	color: #fff !important;
+	text-align: center;
+	background-color: #747a86;
+	border-radius: 2px;
+	padding: 9px 14px 9px 14px;
+	border: 1px solid #747a86;
+	display: inline-block;
+	line-height: 1;
 }

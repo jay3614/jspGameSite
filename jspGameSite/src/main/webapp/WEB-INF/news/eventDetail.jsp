@@ -1,6 +1,7 @@
 <!DOCTYPE html>
+<%@page import="com.game.member.Member"%>
+<%@page import="com.game.member.MemberDAO"%>
 <%@page import="java.io.PrintWriter"%>
-<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="com.game.event.Event"%>
@@ -57,6 +58,13 @@
 
 <body class="animsition">
 <%
+	String id = null;
+
+	id = (String)session.getAttribute("id");
+
+	MemberDAO memberDAO = new MemberDAO();
+	Member member = memberDAO.getMember(id);
+	
 	int eventId = 0;
 	
 	if(request.getParameter("id") != null) {
@@ -71,16 +79,7 @@
 		script.println("</script>");
 	}
 	
-	// 공지 타입만 나오도록 수정 필요
 	Event event = new EventDAO().getEvent(eventId);
-	
-	EventDAO eventDAO = new EventDAO();
-	ArrayList<Event> noticeList = eventDAO.getEventList();
-	
-	Calendar cal = Calendar.getInstance();
-    int nowYear = cal.get(Calendar.YEAR);
-    int nowMonth = cal.get(Calendar.MONTH) + 1;
-    int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 %>
 
 	<jsp:include page="/WEB-INF/fragment/header.jsp" />
@@ -119,11 +118,69 @@
 					<div class="notice_detail_content">
 						<p><%= event.getContent() %></p>
 					</div>
-					<!-- 댓글칸 예정 -->
-					<div>
-					
+					<div class="reply_wrap">
+						<div class="reply_title">
+							<h2>
+							댓글<span>리플수123</span>	<!-- replyList.size() -->
+							</h2>
+						</div>
+						<ul class="reply_ul">
+							<%
+								for(int i = 0; i < 6; i++){	// replyList.size()
+							%>
+							<li>
+								<div class="reply">
+									<p>
+										<span class="reply_id">아이디</span>
+										<span class="reply_time">작성일 2023.11.22</span>
+									</p>
+									<p class="reply_text">댓글 내용</p>
+								</div>
+							</li>
+							<%
+								}
+							%>
+						</ul>
 					</div>
-					<!--  -->
+					<div class="reply_page">
+						<a class="" href="#"><img src="../img/icons/reply_prev.png"></a>
+						
+						<%
+							for(int i = 1; i <= 91 / 10 + 1; i++) {	// replyList.size()
+						%>
+						<a class="" href="#"><%= i %></a>
+						<%
+							}
+						%>
+						<a class="" href="#"><img src="../img/icons/reply_next.png"></a>
+					</div>
+					<div class="comment_form_wrap">
+						<div class="comment_form">
+							<form method="post" action="${pageContext.request.contextPath}/commentAction" id="comment-form">
+								<%
+									if(id == null) {
+										
+									}else {
+								%>
+								<input type="hidden" name="replyer" value="<%= member.getNickname() %>">
+								<%
+									}
+								%>
+								<textarea class="comment" name="comment" rows="10" cols="30" maxlength="200"></textarea>
+								<div class="comment_btn">
+									<div class="float-r m-r-9">
+										<div class="word_count float-l">
+											<span>(</span>
+											<span class="commentCount">0</span>
+											<span>/200)</span>
+										</div>
+										<button class="btn01_g" type="submit">등록</button>
+									</div>
+								</div>
+								
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
 			
@@ -186,6 +243,19 @@
 				span.style.width = 60 + "px";
 			}
 		});
+	</script>
+	<!--===============================================================================================-->
+	<script>
+	$('.comment').keyup(function (e) {
+		let comment = $(this).val();
+		
+		// 글자수 세기
+		if (comment.length == 0 || comment == '') {
+			$('.commentCount').text('0');
+		} else {
+			$('.commentCount').text(comment.length);
+		}
+	});
 	</script>
 </body>
 </html>

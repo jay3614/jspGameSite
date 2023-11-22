@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.game.notice.Notice;
+
 public class MemberDAO {
 
 	private Connection conn;
@@ -24,6 +26,36 @@ public class MemberDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	
+	// 사용자 정보 불러오기
+	public Member getMember(String id) {
+		String SQL = "SELECT * FROM member WHERE id = ?";
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				Member member = new Member();
+				
+				member.setId(rs.getString(1));
+				member.setNickname(rs.getString(2));
+				member.setPassword(rs.getString(3));
+				member.setName(rs.getString(4));
+				member.setPassword(rs.getString(5));
+				member.setGender(rs.getString(6));
+				member.setCash(rs.getInt(7));
+				
+				return member;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 	
 	public int login(String id, String password) {

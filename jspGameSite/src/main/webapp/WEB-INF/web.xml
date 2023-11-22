@@ -113,5 +113,14 @@
   	<url-pattern>/news/eventDetail</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>commentAction</servlet-name>
+  	<jsp-file>/WEB-INF/commentAction.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>commentAction</servlet-name>
+  	<url-pattern>/commentAction</url-pattern>
+  </servlet-mapping>
+  
   
 </web-app>
