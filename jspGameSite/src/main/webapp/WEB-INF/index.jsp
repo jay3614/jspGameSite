@@ -87,7 +87,7 @@
 									for(int i = 0; i < eventList.size(); i++) {
 								%>
 								<div class="swiper-slide">
-									<a href="#"><img class="event-img" id="event-img" src="<%=eventList.get(i).getImage() %>"></a>
+									<a href="news/eventDetail?id=<%= eventList.get(i).getId() %>"><img class="event-img" id="event-img" src="<%=eventList.get(i).getImage() %>"></a>
 								</div>
 								<%
 									}

@@ -110,12 +110,12 @@
 					<div class="m-r-30 m-t-30 event-div">
 						<div class="bg0">
 							<div class="flex-col-l txt-center">
-								<a href="#">
+								<a href="eventDetail?id=<%= eventList.get(i).getId() %>">
 									<img src="<%= eventList.get(i).getImage() %>" style="width: 285px; height: 120px" alt="">
 								</a>
 							</div>
 							<div class="m-tb-10 txt-center">
-								<a class="cl2" href="#">
+								<a class="cl2" href="eventDetail?id=<%= eventList.get(i).getId() %>">
 									<%= eventList.get(i).getTitle() %>
 								</a>
 							</div>
