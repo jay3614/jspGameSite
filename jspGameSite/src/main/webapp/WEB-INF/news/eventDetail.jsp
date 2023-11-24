@@ -67,13 +67,13 @@
 	MemberDAO memberDAO = new MemberDAO();
 	Member member = memberDAO.getMember(id);
 	
-	int eventID = 0;
+	Long target_id = 0L;
 	
 	if(request.getParameter("id") != null) {
-		eventID = Integer.parseInt(request.getParameter("id"));
+		target_id = Long.parseLong(request.getParameter("id"));
 	}
 	
-	if(eventID == 0) {
+	if(target_id == 0L) {
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('유효하지 않은 글입니다.')");
@@ -96,12 +96,12 @@
 	}
 	
 	EventDAO eventDAO = new EventDAO();
-	Event event = eventDAO.getEvent(eventID);
+	Event event = eventDAO.getEvent(target_id);
 	ArrayList<Event> eventList = eventDAO.getEventList();
 	
 	ReplyDAO replyDAO = new ReplyDAO();
-	ArrayList<Reply> replyList = replyDAO.getReplyList(eventID, commentPage);
-	int reply = replyDAO.getReplyCount(eventID);
+	ArrayList<Reply> replyList = replyDAO.getReplyList(target_id, commentPage);
+	int reply = replyDAO.getReplyCount(target_id);
 %>
 
 	<jsp:include page="/WEB-INF/fragment/header.jsp" />
@@ -182,17 +182,10 @@
 						</div>
 						<div class="comment_form_wrap">
 							<div class="comment_form">
-								<form method="post" action="${pageContext.request.contextPath}/commentAction" id="comment-form">
-									<%
-										if(id == null) {
-											
-										}else {
-									%>
-									<input type="hidden" name="replyer" value="<%= member.getNickname() %>">
-									<%
-										}
-									%>
+								<form method="post" action="${pageContext.request.contextPath}/replyWriteAction?id=<%= event.getId()%>">
 									<textarea class="comment" name="comment" rows="10" cols="30" maxlength="200"></textarea>
+									<input type="hidden" name="replyer" value="<%= member.getNickname() %>">
+									<input type="hidden" name="target_id" value="<%= event.getId() %>">
 									<div class="comment_btn">
 										<div class="float-r m-r-9">
 											<div class="word_count float-l">
@@ -203,7 +196,6 @@
 											<button class="btn01_g" type="submit">등록</button>
 										</div>
 									</div>
-									
 								</form>
 							</div>
 						</div>

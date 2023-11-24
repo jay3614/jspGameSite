@@ -42,20 +42,20 @@ public class NoticeDAO {
 	}
 	
 	// 아직 미사용
-	public int getNext() {
+	public Long getNext() {
 		String SQL = "SELECT id FROM notice ORDER BY id DESC";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				return rs.getInt(1) + 1;	// Long 변환해야함
+				return rs.getLong(1) + 1L;
 			}
-			return 1;	// 첫 번째 게시물인 경우
+			return 1L;	// 첫 번째 게시물인 경우
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return -1;	// 데이터베이스 오류
+		return -1L;	// 데이터베이스 오류
 	}
 	
 	// 아직 미사용
@@ -234,7 +234,7 @@ public class NoticeDAO {
 	}
 	
 	// 글 상세
-	public Notice getNotice(long id) {
+	public Notice getNotice(Long id) {
 		
 		String SQL = "SELECT * FROM notice WHERE id = ?";
 		
@@ -268,7 +268,7 @@ public class NoticeDAO {
 	}
 	
 	// 조회수 증가
-	public int countUpdate(int viewCount, long id) {
+	public int countUpdate(int viewCount, Long id) {
 		String SQL = "update notice set viewCount = ? where id = ?";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
@@ -303,7 +303,7 @@ public class NoticeDAO {
 	
 	// 아직 미사용
 	// 글 삭제
-	public int delete(long id) {
+	public int delete(Long id) {
 		
 		String SQL = "UPDATE notice WHERE id = ?";
 		

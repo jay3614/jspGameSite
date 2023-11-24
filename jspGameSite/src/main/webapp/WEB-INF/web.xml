@@ -114,12 +114,12 @@
   </servlet-mapping>
   
   <servlet>
-  	<servlet-name>commentAction</servlet-name>
-  	<jsp-file>/WEB-INF/commentAction.jsp</jsp-file>
+  	<servlet-name>replyWriteAction</servlet-name>
+  	<jsp-file>/WEB-INF/replyWriteAction.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>commentAction</servlet-name>
-  	<url-pattern>/commentAction</url-pattern>
+  	<servlet-name>replyWriteAction</servlet-name>
+  	<url-pattern>/replyWriteAction</url-pattern>
   </servlet-mapping>
   
   

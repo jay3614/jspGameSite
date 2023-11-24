@@ -4,7 +4,7 @@ package com.game.video;
 
 public class Video {
 	
-	private Long id;
+	private int id;
 	private String title;
 	private String content;
 	private String writer;
@@ -13,10 +13,10 @@ public class Video {
 	private int viewCount;
 	private String date;
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getTitle() {

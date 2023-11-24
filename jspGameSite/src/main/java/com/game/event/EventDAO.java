@@ -121,7 +121,7 @@ public class EventDAO {
 	}
 	
 	// 이벤트 상세
-	public Event getEvent(long id) {
+	public Event getEvent(Long id) {
 		
 		String SQL = "SELECT * FROM event WHERE id = ?";
 		
@@ -155,7 +155,7 @@ public class EventDAO {
 	}
 	
 	// 조회수 증가
-	public int countUpdate(int viewCount, long id) {
+	public int countUpdate(int viewCount, Long id) {
 		String SQL = "update event set viewCount = ? where id = ?";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
@@ -190,7 +190,7 @@ public class EventDAO {
 	}
 	
 	// 아직 미사용
-	public int delete(long id) {
+	public int delete(Long id) {
 		
 		String SQL = "UPDATE event WHERE id = ?";
 		

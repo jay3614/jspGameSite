@@ -41,13 +41,13 @@ public class VideoDAO {
 	}
 	
 	// 아직 미사용
-	public int write(Long id, String title, String content, String writer, String youtubeLink, String date) {
+	public int write(int id, String title, String content, String writer, String youtubeLink, String date) {
 		
 		String SQL = "INSERT INTO video VALUES (?, ?, ?, ?, ?, ?)";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setLong(1, id);
+			pstmt.setInt(1, id);
 			pstmt.setString(2, title);
 			pstmt.setString(3, content);
 			pstmt.setString(4, writer);		// member의 로그인 한 id 넣도록 수정해야함
@@ -76,7 +76,7 @@ public class VideoDAO {
 			while(rs.next()) {
 				Video video = new Video();
 				
-				video.setId(rs.getLong(1));
+				video.setId(rs.getInt(1));
 				video.setTitle(rs.getString(2));
 				video.setWriter(rs.getString(3));	// member타입으로 가져오도록 수정
 				video.setYoutubeLink(rs.getString(4));
@@ -94,20 +94,20 @@ public class VideoDAO {
 	}
 	
 	// 아직 미사용
-	public Video getVideo(long id) {
+	public Video getVideo(int id) {
 		
 		String SQL = "SELECT * FROM video WHERE id = ?";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setLong(1, id);
+			pstmt.setInt(1, id);
 
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				Video video = new Video();
 				
-				video.setId(rs.getLong(1));
+				video.setId(rs.getInt(1));
 				video.setTitle(rs.getString(2));
 				video.setContent(rs.getString(3));
 				video.setWriter(rs.getString(4));	// member타입으로 가져오도록 수정
@@ -145,13 +145,13 @@ public class VideoDAO {
 	}
 	
 	// 아직 미사용
-	public int delete(long id) {
+	public int delete(int id) {
 		
 		String SQL = "UPDATE video WHERE id = ?";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setLong(1, id);
+			pstmt.setInt(1, id);
 			
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
