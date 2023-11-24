@@ -41,30 +41,13 @@ public class VideoDAO {
 	}
 	
 	// 아직 미사용
-	public int getNext() {
-		String SQL = "SELECT id FROM video ORDER BY id DESC";
-		
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				return rs.getInt(1) + 1;	// Long 변환해야함
-			}
-			return 1;	// 첫 번째 게시물인 경우
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;	// 데이터베이스 오류
-	}
-	
-	// 아직 미사용
-	public int write(String title, String content, String writer, String youtubeLink, String date) {
+	public int write(Long id, String title, String content, String writer, String youtubeLink, String date) {
 		
 		String SQL = "INSERT INTO video VALUES (?, ?, ?, ?, ?, ?)";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setLong(1, getNext());
+			pstmt.setLong(1, id);
 			pstmt.setString(2, title);
 			pstmt.setString(3, content);
 			pstmt.setString(4, writer);		// member의 로그인 한 id 넣도록 수정해야함

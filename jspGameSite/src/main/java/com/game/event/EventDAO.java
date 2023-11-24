@@ -42,30 +42,13 @@ public class EventDAO {
 	}
 	
 	// 아직 미사용
-	public int getNext() {
-		String SQL = "SELECT id FROM event ORDER BY id DESC";
-		
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				return rs.getInt(1) + 1;	// Long 변환해야함
-			}
-			return 1;	// 첫 번째 게시물인 경우
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;	// 데이터베이스 오류
-	}
-	
-	// 아직 미사용
-	public int write(String title, String eventRange, String content, String image, int viewCount, String types) {
+	public int write(Long id, String title, String eventRange, String content, String image, int viewCount, String types) {
 		
 		String SQL = "INSERT INTO event VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setLong(1, getNext());
+			pstmt.setLong(1, id);
 			pstmt.setString(2, title);
 			pstmt.setString(3, eventRange);
 			pstmt.setString(4, content);

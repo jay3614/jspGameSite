@@ -4,6 +4,7 @@ public class Reply {
 	
     private Long rno;
 	private String replyer;
+	private Long target_id;
 	private String comment;
 	private String regDate;
 	
@@ -18,6 +19,12 @@ public class Reply {
 	}
 	public void setReplyer(String replyer) {
 		this.replyer = replyer;
+	}
+	public Long getTarget_id() {
+		return target_id;
+	}
+	public void setTarget_id(Long target_id) {
+		this.target_id = target_id;
 	}
 	public String getComment() {
 		return comment;

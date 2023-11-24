@@ -63,8 +63,8 @@
 		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 	}
 	
-	EventDAO eventeDAO = new EventDAO();
-	ArrayList<Event> eventList = eventeDAO.getEventList();
+	EventDAO eventDAO = new EventDAO();
+	ArrayList<Event> eventList = eventDAO.getEventList();
 	
 	Calendar cal = Calendar.getInstance();
     int nowYear = cal.get(Calendar.YEAR);
@@ -74,93 +74,93 @@
 
 	<jsp:include page="/WEB-INF/fragment/header.jsp" />
 	
-	<section class="bg0 p-t-40 p-b-20 flex-c d-flex">
+	<section class="bg0 p-t-40 p-b-20">
 		<div class="d-flex">
-			<div class="m-w-1050 p-b-80 m-r-30">
-				<div class="row p-b-10 wrap-slick3">
-					<ul class="test">
-						<li class="float-l p-l-30"><a class="clblack" href="notice">공지사항</a></li>
-						<li class="float-l p-l-30"><a class="clblack" href="update">업데이트</a></li>
-						<li class="float-l p-l-30"><a class="clblack" href="event">이벤트</a></li>
-					</ul>
-					<span class="mnb_line" style="width: 45px; left: 210px;"></span>
-				</div>
-				<div class="customMenu p-t-30 p-b-30 bor18">
-					<div class="m-w-620">
-						<h1>이벤트</h1>
+			<div class="d-flex m-auto">
+				<div class="m-w-1000 p-b-80 m-r-30">
+					<div class="row p-b-10 wrap-slick3">
+						<ul class="test">
+							<li class="float-l p-l-30"><a class="clblack" href="notice">공지사항</a></li>
+							<li class="float-l p-l-30"><a class="clblack" href="update">업데이트</a></li>
+							<li class="float-l p-l-30"><a class="clblack" href="event">이벤트</a></li>
+						</ul>
+						<span class="mnb_line" style="width: 45px; left: 190px;"></span>
 					</div>
-					<div class="m-w-310">
-						<div class="bor17 of-hidden pos-relative">
-							<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55"
-								type="text" name="search" placeholder="Search">
-		
-							<button
-								class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-								<i class="zmdi zmdi-search"></i>
-							</button>
+					<div class="customMenu p-t-30 p-b-30 bor18">
+						<div class="m-w-620">
+							<h1>이벤트</h1>
 						</div>
-					</div>
-				</div>
-				
-				<!--  -->
-				<div class="d-flex flex-w p-l-30">
-					<%
-						for(int i = 0; i < eventList.size(); i++) {
-					%>
-					<div class="m-r-30 m-t-30 event-div">
-						<div class="bg0">
-							<div class="flex-col-l txt-center">
-								<a href="eventDetail?id=<%= eventList.get(i).getId() %>">
-									<img src="<%= eventList.get(i).getImage() %>" style="width: 285px; height: 120px" alt="">
-								</a>
-							</div>
-							<div class="m-tb-10 txt-center">
-								<a class="cl2" href="eventDetail?id=<%= eventList.get(i).getId() %>">
-									<%= eventList.get(i).getTitle() %>
-								</a>
-							</div>
-							<div class="d-flex flex-c event-div2">
-								<p class="cl9 m-t-15 fs-12">
-									<img class="float-l m-t-1" src="../img/icons/date_icon_new.png">&nbsp;&nbsp;<%= eventList.get(i).getEventRange() %>
-								</p>
-							</div>
-						</div>
-					</div>
-					<%
-						}
-					%>
-				</div>
-				<!--  -->
-				
-				<div class="product__pagination">
-					<div class="pagination h-100 justify-content-center align-items-center">
-						<%
-							if(pageNumber != 1) {
-						%>
-						<a class="custom-btn custom-btn-success" href="event?pageNumber=<%= pageNumber - 1 %>">&lt;&lt;</a>
-						<%
-							}
-						%>
-						<%
-							for(int i = 0; i < (eventList.size() + 1) / 10 + 1; i++) {
-						%>
-							<a class="custom-btn custom-btn-success" href="event?pageNumber=<%= i + 1 %>"><%= i + 1 %></a>
-						<%
-							}
-						%>
-						<%
-							if(pageNumber == 1) {
-						%>
-						<a class="custom-btn custom-btn-success" href="event?pageNumber=<%= pageNumber + 1 %>">&gt;&gt;</a>
-						<%
-							}
-						%>
-					</div>
-				</div>
-			</div>
-
-			<jsp:include page="/WEB-INF/fragment/side.jsp"/>
+						<div class="m-w-310">
+							<div class="bor17 of-hidden pos-relative">
+								<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55"
+									type="text" name="search" placeholder="Search">
 			
+								<button
+									class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
+									<i class="zmdi zmdi-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+					
+					<!--  -->
+					<div class="d-flex flex-w p-l-30">
+						<%
+							for(int i = 0; i < eventList.size(); i++) {
+						%>
+						<div class="m-r-30 m-t-30 event-div">
+							<div class="bg0">
+								<div class="flex-col-l txt-center">
+									<a href="eventDetail?id=<%= eventList.get(i).getId() %>&commentPage=1">
+										<img src="<%= eventList.get(i).getImage() %>" style="width: 285px; height: 120px" alt="">
+									</a>
+								</div>
+								<div class="m-tb-10 txt-center">
+									<a class="cl2" href="eventDetail?id=<%= eventList.get(i).getId() %>&commentPage=1">
+										<%= eventList.get(i).getTitle() %>
+									</a>
+								</div>
+								<div class="d-flex flex-c event-div2">
+									<p class="cl9 m-t-15 fs-12">
+										<img class="float-l m-t-1" src="../img/icons/date_icon_new.png">&nbsp;&nbsp;<%= eventList.get(i).getEventRange() %>
+									</p>
+								</div>
+							</div>
+						</div>
+						<%
+							}
+						%>
+					</div>
+					<!--  -->
+					
+					<div class="product__pagination">
+						<div class="pagination h-100 justify-content-center align-items-center">
+							<%
+								if(pageNumber != 1) {
+							%>
+							<a class="custom-btn custom-btn-success" href="event?pageNumber=<%= pageNumber - 1 %>">&lt;&lt;</a>
+							<%
+								}
+							%>
+							<%
+								for(int i = 0; i < (eventList.size() + 1) / 10 + 1; i++) {
+							%>
+								<a class="custom-btn custom-btn-success" href="event?pageNumber=<%= i + 1 %>"><%= i + 1 %></a>
+							<%
+								}
+							%>
+							<%
+								if(pageNumber == 1) {
+							%>
+							<a class="custom-btn custom-btn-success" href="event?pageNumber=<%= pageNumber + 1 %>">&gt;&gt;</a>
+							<%
+								}
+							%>
+						</div>
+					</div>
+				</div>
+				<jsp:include page="/WEB-INF/fragment/side.jsp"/>
+			</div>
 		</div>
 	</section>
 	
@@ -209,13 +209,13 @@
 			const span = document.querySelector(".mnb_line");
 			
 			if(li.textContent === "업데이트") {
-				span.style.left = li.offsetLeft + 30 + "px";
+				span.style.left = li.offsetLeft + 25 + "px";
 				span.style.width = 60 + "px";
 			}else if(li.textContent === "이벤트") {
-				span.style.left = li.offsetLeft + 30 + "px";
+				span.style.left = li.offsetLeft + 27 + "px";
 				span.style.width = 45 + "px";
 			}else if(li.textContent === "공지사항") {
-				span.style.left = li.offsetLeft + 30 + "px";
+				span.style.left = li.offsetLeft + 25 + "px";
 				span.style.width = 60 + "px";
 			}
 		});

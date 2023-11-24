@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@page import="com.game.reply.ReplyDAO"%>
+<%@page import="com.game.reply.Reply"%>
 <%@page import="com.game.member.Member"%>
 <%@page import="com.game.member.MemberDAO"%>
 <%@page import="java.io.PrintWriter"%>
@@ -65,127 +67,150 @@
 	MemberDAO memberDAO = new MemberDAO();
 	Member member = memberDAO.getMember(id);
 	
-	int eventId = 0;
+	int eventID = 0;
 	
 	if(request.getParameter("id") != null) {
-		eventId = Integer.parseInt(request.getParameter("id"));
+		eventID = Integer.parseInt(request.getParameter("id"));
 	}
 	
-	if(eventId == 0) {
+	if(eventID == 0) {
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('유효하지 않은 글입니다.')");
-		script.println("location.href = 'notice'");
+		script.println("location.href = 'event'");
 		script.println("</script>");
 	}
 	
-	Event event = new EventDAO().getEvent(eventId);
+	int commentPage = 0;
+	
+	if(request.getParameter("commentPage") != null) {
+		commentPage = Integer.parseInt(request.getParameter("commentPage"));
+	}
+	
+	if(commentPage == 0) {
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('유효하지 않은 페이지입니다.')");
+		script.println("location.href = 'event'");
+		script.println("</script>");
+	}
+	
+	EventDAO eventDAO = new EventDAO();
+	Event event = eventDAO.getEvent(eventID);
+	ArrayList<Event> eventList = eventDAO.getEventList();
+	
+	ReplyDAO replyDAO = new ReplyDAO();
+	ArrayList<Reply> replyList = replyDAO.getReplyList(eventID, commentPage);
+	int reply = replyDAO.getReplyCount(eventID);
 %>
 
 	<jsp:include page="/WEB-INF/fragment/header.jsp" />
 	
-	<section class="bg0 p-t-40 p-b-20 flex-c d-flex">
+	<section class="bg0 p-t-40 p-b-20">
 		<div class="d-flex">
-			<div class="m-w-930 p-b-80 m-r-30">
-				<div class="row p-b-10 wrap-slick3">
-					<ul class="test">
-						<li class="float-l p-l-30"><a class="clblack" href="notice">공지사항</a></li>
-						<li class="float-l p-l-30"><a class="clblack" href="update">업데이트</a></li>
-						<li class="float-l p-l-30"><a class="clblack" href="event">이벤트</a></li>
-					</ul>
-					<span class="mnb_line" style="width: 60px; left: 210px;"></span>
-				</div>
-				<div class="p-l-30">
-					<div class="customMenu p-t-30 p-b-30 bor18 flex-sb">
-						<div>
-							<h1>이벤트</h1>
-						</div>
-						<div class="custom_border">
-							<span><a href="notice">목록</a></span>
-						</div>
-					</div>
-					<p class="notice_detail_title">
-						<img class="float-l m-r-7 m-t--4" src="../img/icons/notice_icon01.png"><span><%= event.getTitle() %></span>
-					</p>
-					<div class="notice_detail_time">
-						<div class="flex-sb m-lr-27">
-							<p class="float-l time_style"><img class="clock float-l" src="../img/icons/sub_date_new.png">
-								<%= event.getEventRange()%>
-							</p>
-							<p class="float-l time_style"><img class="clock float-l" src="../img/icons/eye_new.png"><%= event.getViewCount() %></p>
-						</div>
-					</div>
-					<div class="notice_detail_content">
-						<p><%= event.getContent() %></p>
-					</div>
-					<div class="reply_wrap">
-						<div class="reply_title">
-							<h2>
-							댓글<span>리플수123</span>	<!-- replyList.size() -->
-							</h2>
-						</div>
-						<ul class="reply_ul">
-							<%
-								for(int i = 0; i < 6; i++){	// replyList.size()
-							%>
-							<li>
-								<div class="reply">
-									<p>
-										<span class="reply_id">아이디</span>
-										<span class="reply_time">작성일 2023.11.22</span>
-									</p>
-									<p class="reply_text">댓글 내용</p>
-								</div>
-							</li>
-							<%
-								}
-							%>
+			<div class="d-flex m-auto">
+				<div class="m-w-930 p-b-80 m-r-30">
+					<div class="row p-b-10 wrap-slick3">
+						<ul class="test">
+							<li class="float-l p-l-30"><a class="clblack" href="notice">공지사항</a></li>
+							<li class="float-l p-l-30"><a class="clblack" href="update">업데이트</a></li>
+							<li class="float-l p-l-30"><a class="clblack" href="event">이벤트</a></li>
 						</ul>
+						<span class="mnb_line" style="width: 45px; left: 190px;"></span>
 					</div>
-					<div class="reply_page">
-						<a class="" href="#"><img src="../img/icons/reply_prev.png"></a>
-						
-						<%
-							for(int i = 1; i <= 91 / 10 + 1; i++) {	// replyList.size()
-						%>
-						<a class="" href="#"><%= i %></a>
-						<%
-							}
-						%>
-						<a class="" href="#"><img src="../img/icons/reply_next.png"></a>
-					</div>
-					<div class="comment_form_wrap">
-						<div class="comment_form">
-							<form method="post" action="${pageContext.request.contextPath}/commentAction" id="comment-form">
+					<div class="p-l-30">
+						<div class="customMenu p-t-30 p-b-30 bor18 flex-sb">
+							<div>
+								<h1>이벤트</h1>
+							</div>
+							<div class="custom_border">
+								<span><a href="notice">목록</a></span>
+							</div>
+						</div>
+						<p class="notice_detail_title">
+							<img class="float-l m-r-7 m-t--4" src="../img/icons/notice_icon01.png"><span><%= event.getTitle() %></span>
+						</p>
+						<div class="notice_detail_time">
+							<div class="flex-sb m-lr-27">
+								<p class="float-l time_style"><img class="clock float-l" src="../img/icons/sub_date_new.png">
+									<%= event.getEventRange()%>
+								</p>
+								<p class="float-l time_style"><img class="clock float-l" src="../img/icons/eye_new.png"><%= event.getViewCount() %></p>
+							</div>
+						</div>
+						<div class="notice_detail_content">
+							<p><%= event.getContent() %></p>
+						</div>
+						<div class="reply_wrap" id="reply_wrap">
+							<div class="reply_title">
+								<h2>
+								댓글<span><%= reply %></span>
+								</h2>
+							</div>
+							
+							<ul class="reply_ul">
 								<%
-									if(id == null) {
-										
-									}else {
+									for(int i = 0; i < replyList.size(); i++){
 								%>
-								<input type="hidden" name="replyer" value="<%= member.getNickname() %>">
+								<li>
+									<div class="reply">
+										<p>
+											<span class="reply_id"><%= replyList.get(i).getReplyer() %></span>
+											<span class="reply_time">
+											<%= replyList.get(i).getRegDate().substring(0, 10).replace("-", ".") %>
+											</span>
+										</p>
+										<p class="reply_text"><%= replyList.get(i).getComment() %></p>
+									</div>
+								</li>
 								<%
 									}
 								%>
-								<textarea class="comment" name="comment" rows="10" cols="30" maxlength="200"></textarea>
-								<div class="comment_btn">
-									<div class="float-r m-r-9">
-										<div class="word_count float-l">
-											<span>(</span>
-											<span class="commentCount">0</span>
-											<span>/200)</span>
+							</ul>
+						</div>
+						<div class="reply_page">
+							<a class="" href="#"><img src="../img/icons/reply_prev.png"></a>
+							
+							<%
+								for(int i = 1; i <= reply / 10 + 1; i++) {	// 댓글 페이징 처리 해야함
+							%>
+							<a class="commentPage<%= i %>" href="eventDetail?id=<%= event.getId() %>&commentPage=<%= i %>"><%= i %></a>
+							<%
+								}
+							%>
+							<a class="" href="#"><img src="../img/icons/reply_next.png"></a>
+						</div>
+						<div class="comment_form_wrap">
+							<div class="comment_form">
+								<form method="post" action="${pageContext.request.contextPath}/commentAction" id="comment-form">
+									<%
+										if(id == null) {
+											
+										}else {
+									%>
+									<input type="hidden" name="replyer" value="<%= member.getNickname() %>">
+									<%
+										}
+									%>
+									<textarea class="comment" name="comment" rows="10" cols="30" maxlength="200"></textarea>
+									<div class="comment_btn">
+										<div class="float-r m-r-9">
+											<div class="word_count float-l">
+												<span>(</span>
+												<span class="commentCount">0</span>
+												<span>/200)</span>
+											</div>
+											<button class="btn01_g" type="submit">등록</button>
 										</div>
-										<button class="btn01_g" type="submit">등록</button>
 									</div>
-								</div>
-								
-							</form>
+									
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			
-			<jsp:include page="/WEB-INF/fragment/side.jsp"/>
-			
+				<jsp:include page="/WEB-INF/fragment/side.jsp"/>
+			</div>			
 		</div>
 	</section>
 	
@@ -233,13 +258,13 @@
 			const span = document.querySelector(".mnb_line");
 			
 			if(li.textContent === "업데이트") {
-				span.style.left = li.offsetLeft + 30 + "px";
+				span.style.left = li.offsetLeft + 25 + "px";
 				span.style.width = 60 + "px";
 			}else if(li.textContent === "이벤트") {
-				span.style.left = li.offsetLeft + 30 + "px";
+				span.style.left = li.offsetLeft + 27 + "px";
 				span.style.width = 45 + "px";
 			}else if(li.textContent === "공지사항") {
-				span.style.left = li.offsetLeft + 30 + "px";
+				span.style.left = li.offsetLeft + 25 + "px";
 				span.style.width = 60 + "px";
 			}
 		});

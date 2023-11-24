@@ -96,7 +96,7 @@
 						<li class="float-l p-l-30"><a class="clblack" href="update">업데이트</a></li>
 						<li class="float-l p-l-30"><a class="clblack" href="event">이벤트</a></li>
 					</ul>
-					<span class="mnb_line" style="width: 60px; left: 30px;"></span>
+					<span class="mnb_line" style="width: 60px; left: 25px;"></span>
 				</div>
 				<div class="p-l-30">
 					<div class="customMenu p-t-30 p-b-30 bor18 flex-sb">
@@ -270,13 +270,13 @@
 			const span = document.querySelector(".mnb_line");
 			
 			if(li.textContent === "업데이트") {
-				span.style.left = li.offsetLeft + 30 + "px";
+				span.style.left = li.offsetLeft + 25 + "px";
 				span.style.width = 60 + "px";
 			}else if(li.textContent === "이벤트") {
-				span.style.left = li.offsetLeft + 30 + "px";
+				span.style.left = li.offsetLeft + 27 + "px";
 				span.style.width = 45 + "px";
 			}else if(li.textContent === "공지사항") {
-				span.style.left = li.offsetLeft + 30 + "px";
+				span.style.left = li.offsetLeft + 25 + "px";
 				span.style.width = 60 + "px";
 			}
 		});
