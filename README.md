@@ -44,7 +44,7 @@
   <br><br><br>
 
   ## 공지사항 게시판 상세화면 
-  ![](https://i.imgur.com/oUSvk1f.jpg)
+  ![](https://i.imgur.com/rrNer1H.jpg)
   
   <br><br><br>
 
