@@ -1,4 +1,4 @@
-# jspGameSite(작업중)
+# jspGameSite
 - 게임 웹사이트 제작
 - 개인 프로젝트
 - 기존의 SpringBoot 기반으로 작업하던 gameSite 프로젝트를 jsp 버전으로 변경해서 작업하기
@@ -38,23 +38,23 @@
   
   <br><br><br>
   
-  ## 공지사항 게시판 화면 
-  ![](https://i.imgur.com/oUSvk1f.jpg)
+  ## 게시판 화면 
+  ![](https://i.imgur.com/NT4ohVX.jpeg)
   
   <br><br><br>
 
-  ## 공지사항 게시판 상세화면 
-  ![](https://i.imgur.com/oUSvk1f.jpg)
+  ## 게시판 상세화면&댓글
+  ![](https://i.imgur.com/71KgXQu.jpeg)
   
   <br><br><br>
 
   ## 로그인 화면
-  ![](https://i.imgur.com/mlHfjQU.jpg)
+  ![](https://i.imgur.com/nzc8JPH.jpeg)
   
   <br><br><br>
   
   ## 회원가입 화면
-  ![](https://i.imgur.com/aj19MfI.jpg)
+  ![](https://i.imgur.com/qE5PxOu.jpeg)
 
 
 
@@ -65,6 +65,7 @@
   - 마이페이지 기능. (x)
   - 공지사항 게시물 CRUD, 커뮤니티 게시글에 이미지 등록 기능. (x)
   - 유튜브 영상을 링크 방식으로 업로드 시 영상의 썸네일을 이미지로 가져오는 기능(o)
+  - 이벤트 게시물에 댓글 달기 기능(o)
 
 
 # 개발 예정 포인트
