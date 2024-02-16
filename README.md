@@ -38,23 +38,23 @@
   
   <br><br><br>
   
-  ## 공지사항 게시판 화면 
-  ![](https://i.imgur.com/oUSvk1f.jpg)
+  ## 게시판 화면 
+  ![](https://i.imgur.com/NT4ohVX.jpeg)
   
   <br><br><br>
 
-  ## 공지사항 게시판 상세화면 
-  ![](https://i.imgur.com/rrNer1H.jpg)
+  ## 게시판 상세화면&댓글
+  ![](https://i.imgur.com/71KgXQu.jpeg)
   
   <br><br><br>
 
   ## 로그인 화면
-  ![](https://i.imgur.com/mlHfjQU.jpg)
+  ![](https://i.imgur.com/nzc8JPH.jpeg)
   
   <br><br><br>
   
   ## 회원가입 화면
-  ![](https://i.imgur.com/aj19MfI.jpg)
+  ![](https://i.imgur.com/qE5PxOu.jpeg)
 
 
 
