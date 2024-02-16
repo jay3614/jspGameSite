@@ -30,7 +30,7 @@
 					</div>
 					
 					<div class="left-top-bar">
-						<a href="https://github.com/jay3614/jspGameSite"><img src="${pageContext.request.contextPath}/img/icons/logo1.png" alt="IMG-LOGO"></a>
+						<a href="${pageContext.request.contextPath}/index"><img src="${pageContext.request.contextPath}/img/icons/logo1.png" alt="IMG-LOGO"></a>
 					</div>
 
 					<div class="right-top-bar flex-w h-full">

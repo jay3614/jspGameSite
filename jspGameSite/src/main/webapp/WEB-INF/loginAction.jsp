@@ -15,48 +15,44 @@
 </head>
 <body>
 	<%
-		String id = null;
-		
-		if(session.getAttribute("id") != null){
-			id = (String)session.getAttribute("id");
-		}
-		
-		if(id != null){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('이미 로그인이 되어있습니다.')");
-			script.println("location.href = 'index'");
-			script.println("</script>");
-		}
+	PrintWriter script = response.getWriter();
+	String id = null;
+	if(session.getAttribute("id") != null){
+		id = (String)session.getAttribute("id");
+	}
 	
-		MemberDAO memberDAO = new MemberDAO();
-		int result = memberDAO.login(member.getId(), member.getPassword());
-		
-		if(result == 1){
-			session.setAttribute("id", member.getId());
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("location.href = 'index'");
-			script.println("</script>");
-		}else if(result == 0){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('비밀번호가 틀립니다.')");
-			script.println("history.back()");
-			script.println("</script>");
-		}else if(result == -1){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('존재하지 않는 아이디입니다.')");
-			script.println("history.back()");
-			script.println("</script>");
-		}else if(result == -2){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('데이터베이스 오류가 발생했습니다.')");
-			script.println("history.back()");
-			script.println("</script>");
-		}
+	if(id != null){
+		script.println("<script>");
+		script.println("alert('이미 로그인이 되어있습니다.')");
+		script.println("location.href = 'index'");
+		script.println("</script>");
+	}
+	
+	MemberDAO memberDAO = new MemberDAO();
+	int result = memberDAO.login(member.getId(), member.getPassword());
+	
+	if(result == 1){
+		session.setAttribute("id", member.getId());
+		session.setAttribute("nickname", member.getNickname());
+		script.println("<script>");
+		script.println("location.href = 'index'");
+		script.println("</script>");
+	}else if(result == 0){
+		script.println("<script>");
+		script.println("alert('비밀번호가 틀립니다.')");
+		script.println("history.back()");
+		script.println("</script>");
+	}else if(result == -1){
+		script.println("<script>");
+		script.println("alert('존재하지 않는 아이디입니다.')");
+		script.println("history.back()");
+		script.println("</script>");
+	}else if(result == -2){
+		script.println("<script>");
+		script.println("alert('데이터베이스 오류가 발생했습니다.')");
+		script.println("history.back()");
+		script.println("</script>");
+	}
 	%>
 </body>
 </html>

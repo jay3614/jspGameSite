@@ -58,7 +58,6 @@ public class ReplyDAO {
 		return -1L;	// 데이터베이스 오류
 	}
 	
-	// 아직 미사용
 	// 글 작성
 	public int write(String replyer, Long target_id, String comment) {
 		
@@ -137,11 +136,9 @@ public class ReplyDAO {
 		
 	}
 	
-	// 아직 미사용
 	// 댓글 삭제
 	public int delete(Long rno) {
-		
-		String SQL = "UPDATE reply WHERE rno = ?";
+		String SQL = "DELETE FROM reply WHERE rno = ?";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -152,7 +149,28 @@ public class ReplyDAO {
 			e.printStackTrace();
 		}
 		return -1;	// 데이터베이스 오류
-		
 	}
 	
+	// rno로 로그인유저와 댓글작성자 비교
+	public String compare(Long rno) {
+		String SQL = "SELECT replyer FROM reply WHERE rno = ?";
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setLong(1, rno);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				Reply reply = new Reply();
+				
+				reply.setReplyer(rs.getString(1));
+				
+				return reply.getReplyer();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;	// 데이터베이스 오류
+	}
 }

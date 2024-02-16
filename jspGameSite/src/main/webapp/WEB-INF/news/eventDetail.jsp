@@ -60,6 +60,7 @@
 
 <body class="animsition">
 <%
+	PrintWriter script = response.getWriter();
 	String id = null;
 
 	id = (String)session.getAttribute("id");
@@ -74,7 +75,6 @@
 	}
 	
 	if(target_id == 0L) {
-		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('유효하지 않은 글입니다.')");
 		script.println("location.href = 'event'");
@@ -88,7 +88,6 @@
 	}
 	
 	if(commentPage == 0) {
-		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('유효하지 않은 페이지입니다.')");
 		script.println("location.href = 'event'");
@@ -159,6 +158,7 @@
 											<span class="reply_time">
 											<%= replyList.get(i).getRegDate().substring(0, 10).replace("-", ".") %>
 											</span>
+											<a class="delete_reply" onclick="deleteReply(<%= replyList.get(i).getRno() %>)">삭제</a>
 										</p>
 										<p class="reply_text"><%= replyList.get(i).getComment() %></p>
 									</div>
@@ -172,7 +172,7 @@
 							<a class="" href="#"><img src="../img/icons/reply_prev.png"></a>
 							
 							<%
-								for(int i = 1; i <= reply / 10 + 1; i++) {	// 댓글 페이징 처리 해야함
+								for(int i = 1; i <= reply / 10 + 1; i++) {
 							%>
 							<a class="commentPage<%= i %>" href="eventDetail?id=<%= event.getId() %>&commentPage=<%= i %>"><%= i %></a>
 							<%
@@ -182,6 +182,9 @@
 						</div>
 						<div class="comment_form_wrap">
 							<div class="comment_form">
+								<%
+								if(id != null){
+								%>
 								<form method="post" action="${pageContext.request.contextPath}/replyWriteAction?id=<%= event.getId()%>">
 									<textarea class="comment" name="comment" rows="10" cols="30" maxlength="200"></textarea>
 									<input type="hidden" name="replyer" value="<%= member.getNickname() %>">
@@ -197,6 +200,23 @@
 										</div>
 									</div>
 								</form>
+								<%
+								}else{
+								%>
+								<textarea class="comment" name="comment" rows="10" cols="30" maxlength="200"></textarea>
+								<div class="comment_btn">
+										<div class="float-r m-r-9">
+											<div class="word_count float-l">
+												<span>(</span>
+												<span class="commentCount">0</span>
+												<span>/200)</span>
+											</div>
+											<button class="btn01_g" onclick="needLogin()" type="button">등록</button>
+										</div>
+									</div>
+								<%
+								}
+								%>
 							</div>
 						</div>
 					</div>
@@ -273,6 +293,29 @@
 			$('.commentCount').text(comment.length);
 		}
 	});
+	</script>
+	<!--===============================================================================================-->
+	<script>
+		function needLogin() {
+			alert("로그인이 필요합니다.");
+		}
+	</script>
+	<!--===============================================================================================-->
+	<script>
+		function deleteReply(rno) {
+			if(confirm("삭제하시겠습니까?")) {
+				var form = document.createElement('form');
+				form.setAttribute('method', 'post');
+				form.setAttribute('action', '${pageContext.request.contextPath}/replyDeleteAction?rno=' + rno + "&target_id=" + <%= event.getId()%>);
+
+				document.body.appendChild(form);
+				form.submit();
+				
+				alert("삭제하였습니다.");
+				
+				document.body.removeChild(form);	//
+			}
+		}
 	</script>
 </body>
 </html>

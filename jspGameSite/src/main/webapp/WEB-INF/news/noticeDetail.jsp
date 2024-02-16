@@ -57,10 +57,10 @@
 
 <body class="animsition">
 <%
-	int noticeId = 0;
+	Long noticeId = 0L;
 	
 	if(request.getParameter("id") != null) {
-		noticeId = Integer.parseInt(request.getParameter("id"));
+		noticeId = Long.parseLong(request.getParameter("id"));
 	}
 	
 	if(noticeId == 0) {

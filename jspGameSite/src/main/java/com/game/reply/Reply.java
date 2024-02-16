@@ -2,7 +2,7 @@ package com.game.reply;
 
 public class Reply {
 	
-    private Long rno;
+	private Long rno;
 	private String replyer;
 	private Long target_id;
 	private String comment;

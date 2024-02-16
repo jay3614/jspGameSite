@@ -41,7 +41,6 @@ public class NoticeDAO {
 		return "";	// 데이터베이스 오류
 	}
 	
-	// 아직 미사용
 	public Long getNext() {
 		String SQL = "SELECT id FROM notice ORDER BY id DESC";
 		

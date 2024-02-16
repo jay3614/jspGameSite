@@ -27,10 +27,10 @@
 			<li class="login-list"><a href="findId" class="login-link trans-04">아이디 찾기</a></li>
 			<li class="login-list"><a href="findPassword" class="login-link trans-04"> 비밀번호 찾기</a></li>
 		</ul>
-		<div class="social-login">
+		<!-- <div class="social-login">
 			<button type="button" onclick="location.href='#'"><img src="img/icons/google.svg"><span class="icon">Google 계정으로 로그인</span></button>
 			<button type="button" onclick="location.href='#'"><img src="img/icons/naver.svg"><span class="icon">Naver 계정으로 로그인</span></button>
-		</div>
+		</div> -->
 	</div>
 	<div class="login-footer">
 		<p class="copyright">SpringBoot personal project All Rights Reserved.</p>
